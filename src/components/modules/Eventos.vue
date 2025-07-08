@@ -66,7 +66,7 @@ export default {
     this.tag = (this.$route.params.tag) ? this.$route.params.tag : '';
   },
   methods: {
-    loadEventos(perPage = 3, page = 1, tag = '') {
+    loadEventos(perPage = 5, page = 1, tag = '') {
       const eventosTratados = [];
       EventosService.getEventos(perPage, page, tag)
       .then(eventosDados => {

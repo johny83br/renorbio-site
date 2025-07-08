@@ -76,7 +76,7 @@ export default {
     this.tag = (this.$route.params.tag) ? this.$route.params.tag : '';
   },
   methods: {
-    loadNoticias(perPage = 2, page = 1, tag = '') {
+    loadNoticias(perPage = 4, page = 1, tag = '') {
       const noticiasTratadas = [];
       NoticiasService.getNoticias(perPage, page, tag)
       .then(noticiasDados => {
