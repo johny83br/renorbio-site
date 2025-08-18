@@ -9,20 +9,23 @@
           br
           | RENORBIO
           br
-          | UNIVERSIDADE FEDERAL DO ALAGOAS
+          | UNIVERSIDADE FEDERAL DA PARAÍBA
           br
-          | Av. Lourival Melo Mota, S/N
+          | Centro de Biotecnologia
           br
-          | Tabuleiro do Martins
+          | Cidade Universitária, Campus I. CEP 58051-900.
           br
-          | CEP: 57072-900 | Maceió/AL
+          | João Pessoa, PB. Brasil.
       .rodape-centro
         .telefone
           i.fa.fa-phone
-          a(href="tel:+558298151-6043" title="Ligar para:") +55 (82) 98151-6043
+          a(href="tel:+558332167366" title="Ligar para:") +55 (83) 32167366
         .email
           i.fa.fa-envelope
-          a(href="mailto:cgrenorbio@propep.ufal.br"  title="Enviar e-mail para:") cgrenorbio@propep.ufal.br
+          a(href="mailto:renorbiopb.cg@cbiotec.ufpb.br"  title="Enviar e-mail para:") renorbiopb.cg@cbiotec.ufpb.br
+                .email
+          i.fa.fa-envelope
+          a(href="mailto:secrenorbio.cg@cbiotec.ufpb.br"  title="Enviar e-mail para:") secrenorbio.cg@cbiotec.ufpb.br
         .facebook
           a(href='https://www.facebook.com/Doutorado-em-Biotecnologia-Renorbio-254004538887724/' target='_blank' title='Acessar página do'  rel="noopener noreferrer")
             i.fa.fa-facebook-official

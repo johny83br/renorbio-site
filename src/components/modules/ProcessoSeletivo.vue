@@ -1,6 +1,5 @@
 <template lang="pug">
   #processoSeletivo
-
     header
       titulo Processo seletivo
 
@@ -16,7 +15,6 @@
 </template>
 
 <style lang="scss" scoped>
-
   div#processoSeletivo .conteudo {
     display: flex;
     flex-direction: column;
@@ -35,17 +33,14 @@
   }
 
   @include media("<tablet") {
-
     div#processoSeletivo {
       border-bottom: 1px solid rgba(0, 0, 0, .3);
       padding-bottom: 45px;
     }
   }
-
 </style>
 
 <script>
-
 import Arquivo from '@BASICS/ArquivoEdital';
 import Datas from '@BASICS/ProcessoDatas';
 import Descricao from '@BASICS/Descricao';
@@ -63,7 +58,7 @@ export default {
   },
   data() {
     return {
-      datas: []
+      datas: { name: null }
     };
   },
   created() {
@@ -73,24 +68,28 @@ export default {
     getDatas() {
       try {
         ProcessoSeletivo.getProcessoSeletivo()
-        .then(response => {
-          console.log(response.data)
-          const datasTratadas = {
-            name: response.data.registers.name,
-            inscricao_start: DataUtil.dataFormatada(response.data.registers.inscription_start),
-            inscricao_end: DataUtil.dataFormatada(response.data.registers.inscription_end),
-            homologacao: (response.data.registers.homologation_date) ? DataUtil.dataFormatada(response.data.registers.homologation_date) : 'A definir',
-            avaliacao_start: DataUtil.dataFormatada(response.data.registers.rating_start),
-            avaliacao_end: DataUtil.dataFormatada(response.data.registers.rating_end),
-            resultado: DataUtil.dataFormatada(response.data.registers.result_date)
-          };
-          this.datas = datasTratadas;
-        });
+          .then(response => {
+            console.log(response.data);
+            if (response.data && response.data.registers) {
+              const datasTratadas = {
+                name: response.data.registers.name,
+                inscricao_start: DataUtil.dataFormatada(response.data.registers.inscription_start),
+                inscricao_end: DataUtil.dataFormatada(response.data.registers.inscription_end),
+                homologacao: (response.data.registers.homologation_date) ? DataUtil.dataFormatada(response.data.registers.homologation_date) : 'A definir',
+                avaliacao_start: DataUtil.dataFormatada(response.data.registers.rating_start),
+                avaliacao_end: DataUtil.dataFormatada(response.data.registers.rating_end),
+                resultado: DataUtil.dataFormatada(response.data.registers.result_date)
+              };
+              this.datas = datasTratadas;
+            } else {
+              console.log('Dados do processo seletivo não disponíveis');
+              this.datas = { name: null };
+            }
+          });
       } catch (exc) {
-        console.log(exc)
+        console.log(exc);
       }
     }
   }
 };
-
 </script>

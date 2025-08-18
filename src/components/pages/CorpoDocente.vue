@@ -2,6 +2,22 @@
   .container.docentes
     breadcrumb(:itens="breadcrumb")
     titulo Corpo Docente
+    .coordenacao
+      p.coordenador
+        strong Coordenador geral:
+        | Prof. Dr. Demetrius Antonio Machado de Araújo,
+        a(href="mailto:demetrius@cbiotec.ufpb.br") demetrius@cbiotec.ufpb.br
+        | (UFPB)
+      p.coordenador
+        strong Vice-coordenador geral:
+        | Prof. Dr. Enéas Ricardo de Moraes Goes,
+        a(href="mailto:eneasricardo@cbiotec.ufpb.br") eneasricardo@cbiotec.ufpb.br
+        | (UFPB)
+      p.coordenador
+        strong Secretária executiva:
+        | Profa. Dra. Maria Aparecida Maciel,
+        a(href="mailto:mammaciel@hotmail.com") mammaciel@hotmail.com
+        | (UFRN)
     .select
       .busca-docente
         .label-select Buscar por:
@@ -35,6 +51,29 @@
     width: 150px;
     @media screen and (max-width: 425px){
       width: 100%;
+    }
+  }
+
+  .coordenacao {
+    margin: 20px 0 30px 0;
+
+    p.coordenador {
+      margin-bottom: 10px;
+      font-size: 16px;
+      line-height: 1.5;
+
+      strong {
+        color: $cor-azul-1;
+      }
+
+      a {
+        color: $cor-azul-3;
+        text-decoration: none;
+
+        &:hover, &:focus {
+          text-decoration: underline;
+        }
+      }
     }
   }
   .select {
