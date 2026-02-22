@@ -42,251 +42,252 @@
 </template>
 
 <script>
-  import { bus } from '../../main';
+import { bus } from "../../main";
 
-  export default {
-    name: 'MenuNavHeader',
-    props: {
-      tab: {
-        type: Number,
-        default: 1
-      },
-      isDesktopMenu: {
-        type: Boolean,
-        default: true
-      }
+export default {
+  name: "MenuNavHeader",
+  props: {
+    tab: {
+      type: Number,
+      default: 1,
     },
-    data() {
-      return {
-        submenu1IsOpened: false,
-        submenu2IsOpened: false,
-        submenu3IsOpened: false,
-        // itensMenu : [
-        //   {
-        //     name : 'Renorbio',
-        //     subitens : [
-        //       {
-        //         name : 'Sobre a Rede',
-        //         'link-name' : 'Index'
-        //       },
-        //       {
-        //         name : 'Corpo Docente',
-        //         'link-name' : 'Index'
-        //       },
-        //       {
-        //         name : 'Unidades',
-        //         'link-name' : 'Index'
-        //       }
-        //     ]
-        //   },
-        //   {
-        //     name : 'Ingresso',
-        //     'link-name' : 'Index'
-        //   },
-        //   {
-        //     name : 'Laboratórios',
-        //     'link-name' : 'Index'
-        //   },
-        //   {
-        //     name : 'Comunicação',
-        //     subitens : [
-        //       {
-        //         name : 'Notícias',
-        //         'link-name' : 'Noticias'
-        //       },
-        //       {
-        //         name : 'Eventos',
-        //         'link-name' : 'Index'
-        //       },
-        //       {
-        //         name : 'Renorbio na mídia',
-        //         'link-name' : 'Index'
-        //       },
-        //       {
-        //         name : 'Galeria',
-        //         'link-name' : 'Index'
-        //       }
-        //     ]
-        //   },
-        //   {
-        //     name : 'Documentos',
-        //     'link-name' : 'Index',
-        //   },
-        //   {
-        //     name : 'Disciplinas',
-        //     'link-name' : 'Disciplinas',
-        //   },
-        //   {
-        //     name : 'Patentes',
-        //     'link-name' : 'Index',
-        //   },
-        //   {
-        //     name : 'Empresas',
-        //     'link-name' : 'Index',
-        //   },
-        //   {
-        //     name : 'Contato',
-        //     'link-name' : 'Contato',
-        //     params : {}
-        //   }
-        // ]
-      };
+    isDesktopMenu: {
+      type: Boolean,
+      default: true,
     },
-    methods: {
-      isSubmenu(qtd) {
-        return (qtd != undefined && qtd > 0);
-      },
-      toggleSubmenu1() {
-        this.submenu1IsOpened = !this.submenu1IsOpened;
-      },
-      toggleSubmenu2() {
-        this.submenu2IsOpened = !this.submenu2IsOpened;
-      },
-      toggleSubmenu3() {
-        this.submenu3IsOpened = !this.submenu3IsOpened;
-      },
-      toggleMenuPrincipal() {
-        bus.$emit('toggleMenuPrincipal', () => true);
-      },
-      closeSubMenu1() {
-        this.submenu1IsOpened = false;
-      },
-      closeSubMenu2() {
-        this.submenu2IsOpened = false;
-      },
-      closeSubMenu3() {
-        this.submenu3IsOpened = false;
-      }
-    }
-  };
+  },
+  data() {
+    return {
+      submenu1IsOpened: false,
+      submenu2IsOpened: false,
+      submenu3IsOpened: false,
+      // itensMenu : [
+      //   {
+      //     name : 'Renorbio',
+      //     subitens : [
+      //       {
+      //         name : 'Sobre a Rede',
+      //         'link-name' : 'Index'
+      //       },
+      //       {
+      //         name : 'Corpo Docente',
+      //         'link-name' : 'Index'
+      //       },
+      //       {
+      //         name : 'Unidades',
+      //         'link-name' : 'Index'
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     name : 'Ingresso',
+      //     'link-name' : 'Index'
+      //   },
+      //   {
+      //     name : 'Laboratórios',
+      //     'link-name' : 'Index'
+      //   },
+      //   {
+      //     name : 'Comunicação',
+      //     subitens : [
+      //       {
+      //         name : 'Notícias',
+      //         'link-name' : 'Noticias'
+      //       },
+      //       {
+      //         name : 'Eventos',
+      //         'link-name' : 'Index'
+      //       },
+      //       {
+      //         name : 'Renorbio na mídia',
+      //         'link-name' : 'Index'
+      //       },
+      //       {
+      //         name : 'Galeria',
+      //         'link-name' : 'Index'
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     name : 'Documentos',
+      //     'link-name' : 'Index',
+      //   },
+      //   {
+      //     name : 'Disciplinas',
+      //     'link-name' : 'Disciplinas',
+      //   },
+      //   {
+      //     name : 'Patentes',
+      //     'link-name' : 'Index',
+      //   },
+      //   {
+      //     name : 'Empresas',
+      //     'link-name' : 'Index',
+      //   },
+      //   {
+      //     name : 'Contato',
+      //     'link-name' : 'Contato',
+      //     params : {}
+      //   }
+      // ]
+    };
+  },
+  methods: {
+    isSubmenu(qtd) {
+      return qtd !== undefined && qtd > 0;
+    },
+    toggleSubmenu1() {
+      this.submenu1IsOpened = !this.submenu1IsOpened;
+    },
+    toggleSubmenu2() {
+      this.submenu2IsOpened = !this.submenu2IsOpened;
+    },
+    toggleSubmenu3() {
+      this.submenu3IsOpened = !this.submenu3IsOpened;
+    },
+    toggleMenuPrincipal() {
+      bus.$emit("toggleMenuPrincipal", () => true);
+    },
+    closeSubMenu1() {
+      this.submenu1IsOpened = false;
+    },
+    closeSubMenu2() {
+      this.submenu2IsOpened = false;
+    },
+    closeSubMenu3() {
+      this.submenu3IsOpened = false;
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-
-  .link{
-    cursor: pointer;
-    &:hover{
-      color: rgba(255, 255, 255, 0.8) !important;
-    }
+.link {
+  cursor: pointer;
+  &:hover {
+    color: rgba(255, 255, 255, 0.8) !important;
   }
+}
 
-  #menuNav{
-    //
-    // display: flex;
-    // flex-flow: row;
+#menuNav {
+  //
+  // display: flex;
+  // flex-flow: row;
 
-    ul.-desktop{
-      box-sizing: border-box;
-      min-width: 100%;
-      list-style: none;
-      display: flex;
-      flex-flow: row;
-      justify-content: space-between;
-      padding: 0;
-      padding-top: 40px;
-      li:first-of-type{
-        margin-left: 0px;
-      }
-      li{
-        box-sizing: border-box;
-        padding: 0;
-        font-size: 14px;
-        display: inline;
-
-        a{
-          color: $cor-branco;
-          text-decoration: none;
-        }
-
-        .sub-menu{
-          padding-top: 6px;
-          display: block;
-          position: absolute;
-          min-width: 100px;
-          //max-width: 150px;
-          z-index: 1;
-
-          a{
-            display: list-item;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 8px 15px;
-            background-color: $cor-azul-1;
-
-            &:first-child{
-              border-top: 3px solid $cor-branco;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  ul.-mobileOrTablet{
-    background-color: $cor-azul-1;
-    padding: 0;
-    padding-top: 0px;
-    margin-bottom: 0px;
+  ul.-desktop {
     box-sizing: border-box;
     min-width: 100%;
     list-style: none;
-    box-shadow: 0px 20px 20px -15px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    padding: 0;
+    padding-top: 40px;
+    li:first-of-type {
+      margin-left: 0px;
+    }
+    li {
+      box-sizing: border-box;
+      padding: 0;
+      font-size: 14px;
+      display: inline;
 
-    >li{
-      font-weight: bold;
-      width: 100%;
-      font-size: 15px;
-      display: block;
-
-      a{
-        margin-right: 30px;
-        margin-left: 30px;
-        padding-top: 10px;
-        display: block;
+      a {
         color: $cor-branco;
         text-decoration: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        padding-bottom: 10px;
       }
 
-      .sub-menu{
+      .sub-menu {
+        padding-top: 6px;
         display: block;
-        width: 100%;
-        background: $cor-branco;
+        position: absolute;
+        min-width: 100px;
+        //max-width: 150px;
+        z-index: 1;
 
-        a{
-          margin-right: 30px;
-          color: $cor-azul-1;
+        a {
           display: list-item;
-          border-bottom: 1px solid rgba(51, 122, 183, 0.3) !important;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+          padding: 8px 15px;
+          background-color: $cor-azul-1;
 
-          &:hover{
-            color: rgba(51, 122, 183, 0.6) !important;
+          &:first-child {
+            border-top: 3px solid $cor-branco;
           }
-
-          &:last-of-type{
-            border: 0 !important;
-          }
-        }
-      }
-
-      &:last-child{
-        a{
-          border-bottom: 0px;
         }
       }
     }
   }
+}
 
-  .hide{
-    display: none;
-  }
+ul.-mobileOrTablet {
+  background-color: $cor-azul-1;
+  padding: 0;
+  padding-top: 0px;
+  margin-bottom: 0px;
+  box-sizing: border-box;
+  min-width: 100%;
+  list-style: none;
+  box-shadow: 0px 20px 20px -15px rgba(0, 0, 0, 0.8);
 
-  .fademenu-enter, .fade-leave-to {
-    transform: translateY(-5%);
-    opacity: 0;
-  }
+  > li {
+    font-weight: bold;
+    width: 100%;
+    font-size: 15px;
+    display: block;
 
-  .fademenu-enter-active, .fade-leave-active {
-    transition: opacity 0.2s, transform 0.2s;
+    a {
+      margin-right: 30px;
+      margin-left: 30px;
+      padding-top: 10px;
+      display: block;
+      color: $cor-branco;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding-bottom: 10px;
+    }
+
+    .sub-menu {
+      display: block;
+      width: 100%;
+      background: $cor-branco;
+
+      a {
+        margin-right: 30px;
+        color: $cor-azul-1;
+        display: list-item;
+        border-bottom: 1px solid rgba(51, 122, 183, 0.3) !important;
+
+        &:hover {
+          color: rgba(51, 122, 183, 0.6) !important;
+        }
+
+        &:last-of-type {
+          border: 0 !important;
+        }
+      }
+    }
+
+    &:last-child {
+      a {
+        border-bottom: 0px;
+      }
+    }
   }
+}
+
+.hide {
+  display: none;
+}
+
+.fademenu-enter,
+.fade-leave-to {
+  transform: translateY(-5%);
+  opacity: 0;
+}
+
+.fademenu-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s, transform 0.2s;
+}
 </style>

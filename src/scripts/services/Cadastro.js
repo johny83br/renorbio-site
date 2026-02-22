@@ -7,9 +7,9 @@ export default {
     Vue.use(VueResource);
     return Vue.http
       .post(urls.CADASTRO, postData)
-      .then((response) => response)
-      .catch((error) => {
-        console.log(error);
+      .then(response => response)
+      .catch(error => {
+        // console.log(error);
       });
   },
 };

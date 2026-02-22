@@ -13,73 +13,70 @@
 
 </template>
 
-<style lang="scss">
-
-  .noticia-item {
-    display: flex;
-    margin-top: 30px;
-    align-items: center;
-  }
-
-  .noticias-img {
-    margin-right: 15px;
-    opacity: 0.8;
-  }
-
-  .noticias-img:hover {
-    opacity: 1;
-  }
-
-  .noticias-img img {
-    object-fit: cover;
-  }
-
-  .noticias-publicacao {
-    display: flex;
-  }
-
-  @include media("<tablet") {
-    .noticia-item {
-      flex-direction: column;
-      margin-top: 25px;
-      align-items: flex-start;
-    }
-
-    .noticias-info {
-      margin-top: 10px;
-    }
-
-    .noticias-img {
-      align-self: center;
-      margin-right: 0;
-    }
-
-    .noticias-img img {
-      width: 100% !important;
-      height: 180px !important;
-    }
-
-  }
-
-</style>
-
 <script>
-import Datapublic from '@BASICS/Data';
-import Descricao from '@BASICS/Descricao';
-import Hora from '@BASICS/Hora';
-import Subtitulo from '@BASICS/Subtitulo';
+import Datapublic from "@BASICS/Data";
+import Descricao from "@BASICS/Descricao";
+import Hora from "@BASICS/Hora";
+import Subtitulo from "@BASICS/Subtitulo";
 
 export default {
   components: {
     Datapublic,
     Descricao,
     Hora,
-    Subtitulo
+    Subtitulo,
   },
   props: {
     noticias: { type: Array, required: true },
-    altura: {type: Number},
-    largura: {type: Number}
-  }
+    altura: { type: Number },
+    largura: { type: Number },
+  },
 };
 </script>
+
+<style lang="scss">
+.noticia-item {
+  display: flex;
+  margin-top: 30px;
+  align-items: center;
+}
+
+.noticias-img {
+  margin-right: 15px;
+  opacity: 0.8;
+}
+
+.noticias-img:hover {
+  opacity: 1;
+}
+
+.noticias-img img {
+  object-fit: cover;
+}
+
+.noticias-publicacao {
+  display: flex;
+}
+
+@include media("<tablet") {
+  .noticia-item {
+    flex-direction: column;
+    margin-top: 25px;
+    align-items: flex-start;
+  }
+
+  .noticias-info {
+    margin-top: 10px;
+  }
+
+  .noticias-img {
+    align-self: center;
+    margin-right: 0;
+  }
+
+  .noticias-img img {
+    width: 100% !important;
+    height: 180px !important;
+  }
+}
+</style>

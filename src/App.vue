@@ -1,6 +1,11 @@
 <template lang="pug">
   #app
-    page-header(:mobile="isMobile" :tablet="isTablet" :desktop="isDesktop" :internal="isInternal" :tab="1")
+    page-header(
+      :mobile="isMobile"
+      :tablet="isTablet"
+      :desktop="isDesktop"
+      :internal="isInternal"
+      :tab="1")
     .default-content
       router-view
     page-footer
@@ -10,20 +15,20 @@
 </template>
 
 <script>
-import PageHeader from '@BASICS/PageHeader';
-import PageFooter from '@BASICS/PageFooter';
-import backToTop from '@BASICS/backToTop';
-import { bus } from './main';
+import PageHeader from "@BASICS/PageHeader";
+import PageFooter from "@BASICS/PageFooter";
+import backToTop from "@BASICS/backToTop";
+import { bus } from "./main";
 
 export default {
-  name: 'App',
+  name: "App",
   components: { PageHeader, PageFooter, backToTop },
   data() {
     return {
       windowWidth: 0,
       windowHeight: 0,
       isInternal: false,
-      scrollPage: 0
+      scrollPage: 0,
     };
   },
   computed: {
@@ -35,38 +40,33 @@ export default {
     },
     isMobile() {
       return this.windowWidth <= 425;
-    }
+    },
   },
   watch: {
     $route(to, from) {
-      bus.$emit('toggleRouter', () => true);
+      bus.$emit("toggleRouter", () => true);
 
-      if (to.path != '/' && to.path != undefined) {
+      if (to.path !== "/" && to.path !== undefined) {
         this.isInternal = true;
       } else {
         this.isInternal = false;
       }
-    }
+    },
   },
   created() {
-    if (this.$route.name != 'Index') {
+    if (this.$route.name !== "Index") {
       this.isInternal = true;
     } else {
       this.isInternal = false;
     }
-    // if(location.pathname != '/renorbio' && location.pathname != '/renorbio/' && location.pathname != '/' && location.pathname != undefined ){
-    //   this.isInternal = true
-    // }else {
-    //   this.isInternal = false
-    // }
   },
   beforeMount() {
-    window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener("scroll", this.handleScroll);
   },
   mounted() {
-    this.$nextTick(function () {
-      window.addEventListener('resize', this.getWindowWidth);
-      window.addEventListener('resize', this.getWindowHeight);
+    this.$nextTick(() => {
+      window.addEventListener("resize", this.getWindowWidth);
+      window.addEventListener("resize", this.getWindowHeight);
 
       // Init
       this.getWindowWidth();
@@ -74,14 +74,14 @@ export default {
     });
   },
   beforeDestroy() {
-    window.removeEventListener('resize', this.getWindowWidth);
-    window.removeEventListener('resize', this.getWindowHeight);
-    window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener("resize", this.getWindowWidth);
+    window.removeEventListener("resize", this.getWindowHeight);
+    window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
     backTop: () => {
       // Informações sobre a função: http://iamdustan.com/smoothscroll/
-      window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+      window.scroll({ top: 0, left: 0, behavior: "smooth" });
     },
     getWindowWidth(event) {
       this.windowWidth = document.documentElement.clientWidth;
@@ -92,52 +92,51 @@ export default {
     handleScroll() {
       this.scrollPage = window.scrollY;
     },
-  }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.back-top {
+  display: block;
+  position: fixed;
+  bottom: 50px;
+  right: 30px;
+  z-index: 10000;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
 
-  #app {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-  }
-  .back-top {
-    display: block;
-    position: fixed;
-    bottom: 50px;
-    right: 30px;
-    z-index: 10000;
-    border: none;
-    outline: none;
-    cursor: pointer;
-  }
+.default-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
 
-  .default-content {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
+.default-content {
+  @media screen and (min-width: 992px) {
+    //min-height: 500px;
   }
-
-  .default-content{
-    @media screen and (min-width: 992px){
-      //min-height: 500px;
-    }
-  }
+}
 </style>
 <style lang="scss">
 .v--modal-box.v--modal {
-    button.close {
-        background: transparent;
-        border: none;
-        padding: 0;
-        margin: 0 0 10px 0;
-        &:hover,
-        &:focus {
-          opacity: 0.7;
-        }
+  button.close {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0 0 10px 0;
+    &:hover,
+    &:focus {
+      opacity: 0.7;
     }
   }
+}
 </style>

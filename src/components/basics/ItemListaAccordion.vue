@@ -6,66 +6,64 @@
 </template>
 
 <script>
-  export default {
-    name: 'ItemListaDropdown',
-    props: {
-      uid: {
-        type: Number
-      },
-      index: {
-        default: 0
-      },
-      manualIsOpened: {
-        default: false
-      },
-      item: {
-
-      }
+export default {
+  name: "ItemListaDropdown",
+  props: {
+    uid: {
+      type: Number,
     },
-    data() {
-      return {
-        dataIsOpened: this.index == this.item
-      };
+    index: {
+      default: 0,
     },
-    watch: {
-      uid(newUid) {
-        if (newUid != window._uid) this.dataIsOpened = false;
-      }
+    manualIsOpened: {
+      default: false,
     },
-    methods: {
-      emitToggleList() {
-        this.$emit('toggleList', window._uid);
-      },
-      toggleList() {
-        this.dataIsOpened = !this.dataIsOpened;
-      }
-    }
-  };
+    item: {},
+  },
+  data() {
+    return {
+      dataIsOpened: this.index === this.item,
+    };
+  },
+  watch: {
+    uid(newUid) {
+      if (newUid !== window._uid) this.dataIsOpened = false;
+    },
+  },
+  methods: {
+    emitToggleList() {
+      this.$emit("toggleList", window._uid);
+    },
+    toggleList() {
+      this.dataIsOpened = !this.dataIsOpened;
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-  li{
+li {
+  padding: 0;
+  margin: 0;
+  > a {
+    color: $cor-azul-1;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  ul {
     padding: 0;
-    margin: 0;
-    >a{
-      color: $cor-azul-1;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-      &:hover{
+    a {
+      &:hover {
         text-decoration: none;
       }
     }
-    ul{
-      padding: 0;
-      a{
-        &:hover{
-          text-decoration: none;
-        }
-      }
-    }
   }
-  .iten-lista{
-    margin-top: 20px;
-  }
+}
+.iten-lista {
+  margin-top: 20px;
+}
 </style>

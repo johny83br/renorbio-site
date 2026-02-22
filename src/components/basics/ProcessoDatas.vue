@@ -59,8 +59,57 @@
           a(v-if="datas.matriculas_end") a {{datas.matriculas_end}}
 </template>
 
-<style lang="scss">
+<script>
+import { getProcessoSeletivo } from "../../scripts/services/ProcessoSeletivo";
+import DataUtil from "../../scripts/utils/Data";
 
+export default {
+  props: ["interna"],
+  data() {
+    return {
+      datas: [],
+    };
+  },
+  created() {
+    this.getDatas();
+  },
+  methods: {
+    async getDatas() {
+      const processoSeletivo = await getProcessoSeletivo();
+
+      const datasTratadas = {
+        name: processoSeletivo.name,
+        inscricao_start: DataUtil.dataTratada(
+          processoSeletivo.inscription_start,
+        ),
+        inscricao_end: processoSeletivo.inscription_end
+          ? DataUtil.dataTratada(processoSeletivo.inscription_end)
+          : null,
+        homologacao: processoSeletivo.homologation_date
+          ? DataUtil.dataTratada(processoSeletivo.homologation_date)
+          : "A definir",
+        avaliacao_start: DataUtil.dataTratada(processoSeletivo.rating_start),
+        avaliacao_end: processoSeletivo.rating_end
+          ? DataUtil.dataTratada(processoSeletivo.rating_end)
+          : null,
+        resultado: DataUtil.dataTratada(processoSeletivo.result_date),
+        matriculas_start: processoSeletivo.matriculation_start
+          ? DataUtil.dataTratada(processoSeletivo.matriculation_start)
+          : null,
+        matriculas_end: processoSeletivo.matriculation_end
+          ? DataUtil.dataTratada(processoSeletivo.matriculation_end)
+          : null,
+        resultado_aprovados: processoSeletivo.result_curriculum_date
+          ? DataUtil.dataTratada(processoSeletivo.result_curriculum_date)
+          : null,
+      };
+      this.datas = datasTratadas;
+    },
+  },
+};
+</script>
+
+<style lang="scss">
 .content.datas {
   display: flex;
   flex-direction: column;
@@ -68,7 +117,7 @@
 }
 
 .content.datas.interna span {
-  border-bottom: 1px solid #C2C2C2;
+  border-bottom: 1px solid #c2c2c2;
   padding-right: 45px;
   padding-bottom: 10px;
 }
@@ -88,43 +137,4 @@
 .content.datas a:hover {
   text-decoration: none;
 }
-
 </style>
-
-<script>
-  import ProcessoSeletivo from '../../scripts/services/ProcessoSeletivo';
-  import DataUtil from '../../scripts/utils/Data';
-
-  export default {
-    props: ['interna'],
-    data() {
-      return {
-        datas: []
-      };
-    },
-    created() {
-      this.getDatas();
-    },
-    methods: {
-      getDatas() {
-        ProcessoSeletivo.getProcessoSeletivo()
-          .then(response => {
-            const datasTratadas = {
-              name: response.data.registers.name,
-              inscricao_start: DataUtil.dataTratada(response.data.registers.inscription_start),
-              inscricao_end: (response.data.registers.inscription_end) ? DataUtil.dataTratada(response.data.registers.inscription_end) : null,
-              homologacao: (response.data.registers.homologation_date) ? DataUtil.dataTratada(response.data.registers.homologation_date) : 'A definir',
-              avaliacao_start: DataUtil.dataTratada(response.data.registers.rating_start),
-              avaliacao_end: (response.data.registers.rating_end) ? DataUtil.dataTratada(response.data.registers.rating_end) : null,
-              resultado: DataUtil.dataTratada(response.data.registers.result_date),
-              matriculas_start: (response.data.registers.matriculation_start) ? DataUtil.dataTratada(response.data.registers.matriculation_start) : null,
-              matriculas_end: (response.data.registers.matriculation_end) ? DataUtil.dataTratada(response.data.registers.matriculation_end) : null,
-              resultado_aprovados: (response.data.registers.result_curriculum_date) ? DataUtil.dataTratada(response.data.registers.result_curriculum_date) : null
-            };
-            this.datas = datasTratadas;
-          });
-      }
-    }
-  };
-
-</script>

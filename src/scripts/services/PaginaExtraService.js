@@ -6,9 +6,9 @@ export default {
     const service = `${urls.WP_URL}paginas_extras/?slug=${slug}`;
     return axios
       .get(service)
-      .then((response) => response.data[0])
-      .catch((error) => {
-        console.log(error);
+      .then(response => response.data[0])
+      .catch(error => {
+        // console.log(error);
       });
   },
 };

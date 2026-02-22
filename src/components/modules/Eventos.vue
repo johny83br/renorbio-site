@@ -19,24 +19,20 @@
         .datas.loading-effect
 </template>
 
-<style lang="scss">
-
-</style>
-
 <script>
-import EventosLista from '@MODULES/EventosLista';
-import Mensagem from '@BASICS/Mensagem';
-import Titulo from '@BASICS/Titulo';
+import EventosLista from "@MODULES/EventosLista";
+import Mensagem from "@BASICS/Mensagem";
+import Titulo from "@BASICS/Titulo";
 
-import EventosService from '../../scripts/services/EventoService';
+import EventosService from "../../scripts/services/EventoService";
 
-import Data from '../../scripts/utils/Data';
+import Data from "../../scripts/utils/Data";
 
 export default {
   components: {
     EventosLista,
     Mensagem,
-    Titulo
+    Titulo,
   },
   data() {
     return {
@@ -44,8 +40,8 @@ export default {
       totalEventos: 0,
       totalPages: 0,
       naoTemEventos: false,
-      tag: '',
-      loading: true
+      tag: "",
+      loading: true,
     };
   },
   watch: {
@@ -54,42 +50,47 @@ export default {
     },
     tag() {
       this.eventos = this.loadEventos(this.perPage, this.page, this.tag);
-    }
+    },
   },
   mounted() {
-    this.page = (this.$route.params.page) ? this.$route.params.page : 1;
-    this.tag = (this.$route.params.tag) ? this.$route.params.tag : '';
+    this.page = this.$route.params.page ? this.$route.params.page : 1;
+    this.tag = this.$route.params.tag ? this.$route.params.tag : "";
     this.eventos = this.loadEventos(this.perPage, this.page, this.tag);
   },
   beforeUpdate() {
-    this.page = (this.$route.params.page) ? this.$route.params.page : 1;
-    this.tag = (this.$route.params.tag) ? this.$route.params.tag : '';
+    this.page = this.$route.params.page ? this.$route.params.page : 1;
+    this.tag = this.$route.params.tag ? this.$route.params.tag : "";
   },
   methods: {
-    loadEventos(perPage = 5, page = 1, tag = '') {
+    loadEventos(perPage = 5, page = 1, tag = "") {
       const eventosTratados = [];
-      EventosService.getEventos(perPage, page, tag)
-      .then(eventosDados => {
-        eventosDados.data.forEach((evento) => {
+      EventosService.getEventos(perPage, page, tag).then(eventosDados => {
+        eventosDados.data.forEach(evento => {
           const eventoTratado = {
             id: evento.id,
             titulo: evento.title.rendered,
             inicio: Data.dataInversa(evento.acf.data_inicio),
-            fim: (evento.acf.data_fim) ? Data.dataInversa(evento.acf.data_fim) : false,
-            cover: (evento.featured_media) ? evento._embedded['wp:featuredmedia'][0].source_url : 'imagem_padrao.png',
-            legenda: (evento.featured_media) ? evento._embedded['wp:featuredmedia'][0].caption.rendered : '',
+            fim: evento.acf.data_fim
+              ? Data.dataInversa(evento.acf.data_fim)
+              : false,
+            cover: evento.featured_media
+              ? evento._embedded["wp:featuredmedia"][0].source_url
+              : "imagem_padrao.png",
+            legenda: evento.featured_media
+              ? evento._embedded["wp:featuredmedia"][0].caption.rendered
+              : "",
           };
           eventosTratados.push(eventoTratado);
         });
-        this.totaleventos = parseInt(eventosDados.headers['x-wp-total']);
-        this.totalPages = parseInt(eventosDados.headers['x-wp-totalpages']);
+        this.totaleventos = parseInt(eventosDados.headers["x-wp-total"]);
+        this.totalPages = parseInt(eventosDados.headers["x-wp-totalpages"]);
         if (eventosTratados.length === 0) {
           this.naoTemEventos = true;
         }
         this.loading = false;
       });
       return eventosTratados;
-    }
-  }
+    },
+  },
 };
 </script>

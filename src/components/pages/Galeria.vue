@@ -30,96 +30,96 @@
 </template>
 
 <script>
-  import Breadcrumb from '@MODULES/Breadcrumb';
-  import Titulo from '@BASICS/Titulo';
-  import Paginate from "vuejs-paginate";
-  import ImagensLista from '@BASICS/ImagensLista';
-  import Mensagem from '@BASICS/Mensagem';
+import Breadcrumb from "@MODULES/Breadcrumb";
+import Titulo from "@BASICS/Titulo";
+import Paginate from "vuejs-paginate";
+import ImagensLista from "@BASICS/ImagensLista";
+import Mensagem from "@BASICS/Mensagem";
 
-  import GaleriaService from '../../scripts/services/GaleriaService';
+import GaleriaService from "../../scripts/services/GaleriaService";
 
-  import * as config from '../../scripts/config';
+import * as config from "../../scripts/config";
 
-  export default {
-    components: {
-      Breadcrumb,
-      Titulo,
-      Paginate,
-      ImagensLista,
-      Mensagem
-    },
-    data() {
+export default {
+  components: {
+    Breadcrumb,
+    Titulo,
+    Paginate,
+    ImagensLista,
+    Mensagem,
+  },
+  data() {
+    return {
+      breadcrumb: [{ nome: "Comunicação" }, { nome: "Galeria" }],
+      galerias: [],
+      totalGalerias: 0,
+      totalPages: 0,
+      naoTemGalerias: false,
+      page: "",
+      perPage: 8,
+      loading: true,
+    };
+  },
+  head: {
+    title() {
       return {
-        breadcrumb: [
-          { nome: 'Comunicação'},
-          { nome: 'Galeria'}
-        ],
-        galerias: [],
-        totalGalerias: 0,
-        totalPages: 0,
-        naoTemGalerias: false,
-        page: '',
-        perPage: 8,
-        loading: true
+        inner: `${config.SITE_TITLE} - Galeria`,
       };
     },
-    head: {
-      title() {
-        return {
-           inner: `${config.SITE_TITLE} - Galeria`
-         };
-       },
-       meta: [
-         {
-           name: 'description', content: config.SITE_DESC, id: 'description'
-         }
-       ]
-     },
-    mounted() {
-      this.page = (this.$route.params.page) ? parseInt(this.$route.params.page) : 1;
+    meta: [
+      {
+        name: "description",
+        content: config.SITE_DESC,
+        id: "description",
+      },
+    ],
+  },
+  mounted() {
+    this.page = this.$route.params.page ? parseInt(this.$route.params.page) : 1;
+    this.galerias = this.loadGalerias(this.perPage, this.page);
+  },
+  beforeUpdate() {
+    this.page = this.$route.params.page ? parseInt(this.$route.params.page) : 1;
+  },
+  methods: {
+    loadGalerias(perPage, page) {
+      const galeriasTratadas = [];
+      GaleriaService.getGalerias(perPage, page).then(galeriasDados => {
+        for (let i = 0; i < galeriasDados.data.length; i++) {
+          const galeriaTratada = {
+            titulo: galeriasDados.data[i].title.rendered,
+            descricao: galeriasDados.data[i].acf.descricao,
+            cover: galeriasDados.data[i].acf.fotos[0].acf.anexo
+              ? galeriasDados.data[i].acf.fotos[0].acf.anexo
+              : false,
+            link: galeriasDados.data[i].acf.fotos[0].acf.link,
+            slug: galeriasDados.data[i].slug,
+          };
+          if (galeriaTratada.cover === false) {
+            galeriaTratada.cover = galeriaTratada.link;
+          }
+          galeriasTratadas.push(galeriaTratada);
+        }
+        this.totalGalerias = parseInt(galeriasDados.headers["x-wp-total"]);
+        this.totalPages = parseInt(galeriasDados.headers["x-wp-totalpages"]);
+        if (galeriasTratadas.length === 0) {
+          this.naoTemGalerias = true;
+        }
+        this.loading = false;
+      });
+      return galeriasTratadas;
+    },
+    paginate(pageNum) {
+      this.page = pageNum;
+      this.$router.push({ params: { page: pageNum } });
       this.galerias = this.loadGalerias(this.perPage, this.page);
     },
-    beforeUpdate() {
-      this.page = (this.$route.params.page) ? parseInt(this.$route.params.page) : 1;
-    },
-    methods: {
-      loadGalerias(perPage, page) {
-        const galeriasTratadas = [];
-        GaleriaService.getGalerias(perPage, page)
-          .then(galeriasDados => {
-            for (let i = 0; i < galeriasDados.data.length; i++) {
-              const galeriaTratada = {
-                titulo: galeriasDados.data[i].title.rendered,
-                descricao: galeriasDados.data[i].acf.descricao,
-                cover: (galeriasDados.data[i].acf.fotos[0].acf.anexo) ? galeriasDados.data[i].acf.fotos[0].acf.anexo : false,
-                link: galeriasDados.data[i].acf.fotos[0].acf.link,
-                slug: galeriasDados.data[i].slug
-              };
-              if (galeriaTratada.cover == false) {
-                galeriaTratada.cover = galeriaTratada.link;
-              }
-              galeriasTratadas.push(galeriaTratada);
-            }
-            this.totalGalerias = parseInt(galeriasDados.headers['x-wp-total']);
-            this.totalPages = parseInt(galeriasDados.headers['x-wp-totalpages']);
-            if (galeriasTratadas.length === 0) {
-              this.naoTemGalerias = true;
-            }
-            this.loading = false;
-          });
-          return galeriasTratadas;
-      },
-      paginate(pageNum) {
-        this.page = pageNum;
-        this.$router.push({ params: { page: pageNum } });
-        this.galerias = this.loadGalerias(this.perPage, this.page);
-      }
-    }
-  };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-  .col-sm-10.col-md-10.paginacao {
-    margin-bottom: 30px;
-  }
+.col-sm-10.col-md-10.paginacao {
+  margin-bottom: 30px;
+}
 </style>

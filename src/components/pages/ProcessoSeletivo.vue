@@ -141,213 +141,217 @@
           router-link.link(:to="{ name: 'Cadastro' }") Criar conta no portal da Renorbio
 </template>
 
-<style lang="scss" scoped>
-
-  i.fa.fa-file-pdf-o {
-    color: $cor-azul-1;
-    font-size: 16px;
-    margin-right: 10px;
-  }
-
-  .content {
-    margin-bottom: 0px !important;
-  }
-
-  .subtitulo {
-    display: block;
-    margin: 40px 0 25px 0;
-  }
-
-  .descricao {
-    margin: 25px 0 25px 0;
-  }
-
-  .subtitulo,
-  .descricao {
-    text-transform: uppercase;
-    font-weight: bold;
-    cursor: default;
-  }
-
-  ol {
-    list-style-type: lower-latin;
-    padding-left: 20px;
-  }
-
-  ol > li {
-    margin-bottom: 30px;
-  }
-
-  ul {
-    list-style: none;
-    padding-left: 10px;
-  }
-
-  ul > li {
-    margin-top: 10px;
-  }
-
-  .subitem {
-    padding-top: 5px;
-    padding-left: 5px;
-  }
-
-  a {
-    color: $cor-azul-1;
-  }
-
-  .links > li {
-    margin: 25px 0;
-  }
-
-  .links > li:last-child {
-    margin-bottom: 0px;
-  }
-
-  .links a {
-    color: $cor-cinza;
-    text-decoration: none;
-  }
-
-  .links a:hover {
-    color: $cor-azul-1;
-    text-decoration: underline;
-    cursor: pointer;
-  }
-
-  ul.links {
-    padding: 0;
-  }
-
-  .edital::before {
-    content: "\f15c";
-  }
-
-  .edital-anterior::before {
-    content: "\F0ca";
-  }
-
-  .vagas::before {
-    content: "\F15c";
-  }
-
-  .acesso-conta::before {
-    content: "\F090";
-  }
-
-  .criar-conta::before {
-    content: "\F234";
-  }
-
-  .edital::before,
-  .edital-anterior::before,
-  .vagas::before,
-  .acesso-conta::before,
-  .criar-conta::before {
-    font-family: FontAwesome;
-    font-size: 16px;
-    color: $cor-azul-1;
-    margin-right: 10px;
-  }
-</style>
-
 <script>
-import Breadcrumb from '@MODULES/Breadcrumb';
-import Datas from '@BASICS/ProcessoDatas';
-import InternasDescricao from '@BASICS/InternasDescricao';
-import Pagina from '@BASICS/Pagina';
-import ProcessoSeletivoPassos from '@BASICS/ProcessoSeletivoPassos';
-import Titulo from '@BASICS/Titulo';
+import Breadcrumb from "@MODULES/Breadcrumb";
+import Datas from "@BASICS/ProcessoDatas";
+import InternasDescricao from "@BASICS/InternasDescricao";
+import Pagina from "@BASICS/Pagina";
+import ProcessoSeletivoPassos from "@BASICS/ProcessoSeletivoPassos";
+import Titulo from "@BASICS/Titulo";
 
-import ProcessoSeletivo from '../../scripts/services/ProcessoSeletivo';
-import DataUtil from '../../scripts/utils/Data';
+import { getProcessoSeletivo } from "../../scripts/services/ProcessoSeletivo";
+import DataUtil from "../../scripts/utils/Data";
 
-import Disciplinas from '../../scripts/services/Disciplinas';
+import { getAreas } from "../../scripts/services/Disciplinas";
 
-import DocumentosService from '../../scripts/services/DocumentosService';
+import { getCategorias } from "../../scripts/services/DocumentosService";
 
-import * as config from '../../scripts/config';
+import * as config from "../../scripts/config";
 
-  export default {
-    components: {
-      Breadcrumb,
-      Datas,
-      InternasDescricao,
-      Pagina,
-      ProcessoSeletivoPassos,
-      Titulo
-    },
-    data() {
+export default {
+  components: {
+    Breadcrumb,
+    Datas,
+    InternasDescricao,
+    Pagina,
+    ProcessoSeletivoPassos,
+    Titulo,
+  },
+  data() {
+    return {
+      breadcrumb: [{ nome: "Ingresso" }],
+      acessoConta: config.LOGIN,
+      datas: [],
+      areas: [],
+      documentoId: 0,
+      documentoCategoria: 0,
+    };
+  },
+  head: {
+    title() {
       return {
-        breadcrumb: [
-          { nome: 'Ingresso' }
-        ],
-        acessoConta: config.LOGIN,
-        datas: [],
-        areas: [],
-        documentoId: 0,
-        documentoCategoria: 0
+        inner: `${config.SITE_TITLE} - Processo Seletivo`,
       };
     },
-    head: {
-      title() {
-        return {
-           inner: `${config.SITE_TITLE} - Processo Seletivo`
-         };
-       },
-       meta: [
-         {
-           name: 'description', content: config.SITE_DESC, id: 'description'
-         }
-       ]
-     },
-     created() {
-       this.getDatas();
-       this.getAreas();
-       this.getDocumentos();
-     },
-     methods: {
-       getDatas() {
-         ProcessoSeletivo.getProcessoSeletivo()
-           .then(response => {
-             const datasTratadas = {
-               name: response.data.registers.name,
-               inscricao_start: DataUtil.dataFormatada(response.data.registers.inscription_start),
-               inscricao_end: DataUtil.dataFormatada(response.data.registers.inscription_end),
-               homologacao: DataUtil.dataFormatada(response.data.registers.processing_date),
-               avaliacao_start: DataUtil.dataFormatada(response.data.registers.rating_start),
-               avaliacao_end: DataUtil.dataFormatada(response.data.registers.rating_end),
-               resultado: DataUtil.dataFormatada(response.data.registers.result_date)
-             };
-             this.datas = datasTratadas;
-           });
-       },
-       getAreas() {
-         const areasTratadas = [];
-         Disciplinas.getAreas()
-           .then(response => {
-             for (let i = 0; i < response.data.areas.length; i++) {
-               const areaTratada = {
-                 key: response.data.areas[i].id,
-                 name: response.data.areas[i].name
-               };
-               areasTratadas.push(areaTratada);
-             }
-             this.areas = areasTratadas;
-           });
-       },
-       getDocumentos() {
-        DocumentosService.getCategorias()
-          .then(response => {
-            for (let i = 0; i < response.data.length; i++) {
-              if (response.data[i].slug.includes("editais")) {
-                if (!response.data) return
-                this.documentoId = response.data[i].id;
-                this.documentoCategoria = response.data[i].name;
-              }
-            }
-          });
-      }
-     }
-  };
+    meta: [
+      {
+        name: "description",
+        content: config.SITE_DESC,
+        id: "description",
+      },
+    ],
+  },
+  created() {
+    this.getDatas();
+    this.getAreas();
+    this.getDocumentos();
+  },
+  methods: {
+    async getDatas() {
+      const processoSeletivo = await getProcessoSeletivo();
+
+      const datasTratadas = {
+        name: processoSeletivo.name,
+        inscricao_start: DataUtil.dataFormatada(
+          processoSeletivo.inscription_start,
+        ),
+        inscricao_end: DataUtil.dataFormatada(processoSeletivo.inscription_end),
+        homologacao: DataUtil.dataFormatada(processoSeletivo.processing_date),
+        avaliacao_start: DataUtil.dataFormatada(processoSeletivo.rating_start),
+        avaliacao_end: DataUtil.dataFormatada(processoSeletivo.rating_end),
+        resultado: DataUtil.dataFormatada(processoSeletivo.result_date),
+      };
+      this.datas = datasTratadas;
+    },
+    async getAreas() {
+      const areasTratadas = [];
+
+      const areas = getAreas();
+
+      Object.entries(areas).forEach(v => {
+        const i = v[0];
+
+        const areaTratada = {
+          key: areas[i].id,
+          name: areas[i].name,
+        };
+        areasTratadas.push(areaTratada);
+      });
+
+      this.areas = areasTratadas;
+    },
+    async getDocumentos() {
+      const categoriasDocumentos = await getCategorias();
+
+      if (!categoriasDocumentos) return;
+
+      Object.entries(categoriasDocumentos).forEach(v => {
+        const i = v[0];
+        if (categoriasDocumentos[i].slug.includes("editais")) {
+          this.documentoId = categoriasDocumentos[i].id;
+          this.documentoCategoria = categoriasDocumentos[i].name;
+        }
+      });
+    },
+  },
+};
 </script>
+
+<style lang="scss" scoped>
+i.fa.fa-file-pdf-o {
+  color: $cor-azul-1;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.content {
+  margin-bottom: 0px !important;
+}
+
+.subtitulo {
+  display: block;
+  margin: 40px 0 25px 0;
+}
+
+.descricao {
+  margin: 25px 0 25px 0;
+}
+
+.subtitulo,
+.descricao {
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: default;
+}
+
+ol {
+  list-style-type: lower-latin;
+  padding-left: 20px;
+}
+
+ol > li {
+  margin-bottom: 30px;
+}
+
+ul {
+  list-style: none;
+  padding-left: 10px;
+}
+
+ul > li {
+  margin-top: 10px;
+}
+
+.subitem {
+  padding-top: 5px;
+  padding-left: 5px;
+}
+
+a {
+  color: $cor-azul-1;
+}
+
+.links > li {
+  margin: 25px 0;
+}
+
+.links > li:last-child {
+  margin-bottom: 0px;
+}
+
+.links a {
+  color: $cor-cinza;
+  text-decoration: none;
+}
+
+.links a:hover {
+  color: $cor-azul-1;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+ul.links {
+  padding: 0;
+}
+
+.edital::before {
+  content: "\f15c";
+}
+
+.edital-anterior::before {
+  content: "\F0ca";
+}
+
+.vagas::before {
+  content: "\F15c";
+}
+
+.acesso-conta::before {
+  content: "\F090";
+}
+
+.criar-conta::before {
+  content: "\F234";
+}
+
+.edital::before,
+.edital-anterior::before,
+.vagas::before,
+.acesso-conta::before,
+.criar-conta::before {
+  font-family: FontAwesome;
+  font-size: 16px;
+  color: $cor-azul-1;
+  margin-right: 10px;
+}
+</style>

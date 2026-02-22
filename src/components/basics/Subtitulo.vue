@@ -4,30 +4,26 @@
 
 </template>
 
-<style lang="scss" scoped>
-
-  .subtitulo {
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: $cor-cinza;
-    display: inline-block;
-  }
-
-  .subtitulo:hover {
-    color: $cor-azul-1;
-    cursor: pointer;
-    text-decoration: none;
-  }
-
-</style>
-
 <script>
-
-  export default {
-    props: ['destino', 'id']
-    // props: {
-    //   destino: { type: String, required: false }
-    // }
-  };
-
+export default {
+  props: ["destino", "id"],
+  // props: {
+  //   destino: { type: String, required: false }
+  // }
+};
 </script>
+
+<style lang="scss" scoped>
+.subtitulo {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: $cor-cinza;
+  display: inline-block;
+}
+
+.subtitulo:hover {
+  color: $cor-azul-1;
+  cursor: pointer;
+  text-decoration: none;
+}
+</style>

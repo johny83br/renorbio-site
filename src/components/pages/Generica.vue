@@ -2,19 +2,14 @@
   generica(slot="principal")
 </template>
 
-<style lang="scss" scoped>
-
-</style>
-
 <script>
+import Generica from "@MODULES/Generica";
+import Pagina from "@BASICS/Pagina";
 
-import Generica from '@MODULES/Generica';
-import Pagina from '@BASICS/Pagina';
-
-  export default {
-    components: {
-      Generica,
-      Pagina,
-    }
-  };
+export default {
+  components: {
+    Generica,
+    Pagina,
+  },
+};
 </script>

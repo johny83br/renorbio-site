@@ -1,13 +1,11 @@
+/* eslint-disable */
+
 <template lang="pug">
 
 </template>
 
-<style lang="scss">
-
-</style>
-
 <script>
-  export default {
-
-  };
+export default {};
 </script>
+
+<style lang="scss"></style>

@@ -17,97 +17,93 @@
             hora(v-if="evento.hora", :show="true") {{evento.hora}}
 </template>
 
-<style lang="scss">
-
-  .evento-item {
-    display: flex;
-    align-items: flex-start;
-    margin-top: 15px;
-  }
-
-  .eventos-img {
-    margin-right: 15px;
-    opacity: 0.8;
-    margin-top: 4px;
-  }
-
-  .eventos-img:hover {
-    opacity: 1;
-  }
-
-  .eventos-img img {
-    object-fit: cover;
-  }
-
-  .eventos-publicacao {
-    display: flex;
-  }
-
-  a.local::before {
-      content: "\f041";
-      font-family: FontAwesome;
-      margin-right: 5px;
-      text-decoration: none;
-  }
-
-  a.local {
-    color: $cor-cinza;
-    text-decoration: underline;
-  }
-
-  a.local:hover {
-    color: $cor-azul-1;
-  }
-
-  @include media("<tablet") {
-
-    .evento-item {
-      flex-direction: column;
-      align-items: flex-start;
-      margin-top: 30px;
-    }
-
-    .eventos-info {
-      margin-top: 10px;
-    }
-
-    .eventos-img {
-      align-self: center;
-      margin: 0;
-    }
-
-    .eventos-img img {
-      width: 100% !important;
-      height: 180px !important;
-    }
-
-  }
-
-</style>
-
 <script>
-import Datapublic from '@BASICS/Data';
-import Descricao from '@BASICS/Descricao';
-import Hora from '@BASICS/Hora';
-import Subtitulo from '@BASICS/Subtitulo';
+import Datapublic from "@BASICS/Data";
+import Descricao from "@BASICS/Descricao";
+import Hora from "@BASICS/Hora";
+import Subtitulo from "@BASICS/Subtitulo";
 
 export default {
   components: {
     Datapublic,
     Descricao,
     Hora,
-    Subtitulo
+    Subtitulo,
   },
   props: {
     eventos: { type: Array, required: true },
-    altura: {type: Number},
-    largura: {type: Number},
-    show: {default: true}
+    altura: { type: Number },
+    largura: { type: Number },
+    show: { default: true },
   },
   data() {
     return {
-      exibir: this.show
+      exibir: this.show,
     };
-  }
+  },
 };
 </script>
+
+<style lang="scss">
+.evento-item {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 15px;
+}
+
+.eventos-img {
+  margin-right: 15px;
+  opacity: 0.8;
+  margin-top: 4px;
+}
+
+.eventos-img:hover {
+  opacity: 1;
+}
+
+.eventos-img img {
+  object-fit: cover;
+}
+
+.eventos-publicacao {
+  display: flex;
+}
+
+a.local::before {
+  content: "\f041";
+  font-family: FontAwesome;
+  margin-right: 5px;
+  text-decoration: none;
+}
+
+a.local {
+  color: $cor-cinza;
+  text-decoration: underline;
+}
+
+a.local:hover {
+  color: $cor-azul-1;
+}
+
+@include media("<tablet") {
+  .evento-item {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 30px;
+  }
+
+  .eventos-info {
+    margin-top: 10px;
+  }
+
+  .eventos-img {
+    align-self: center;
+    margin: 0;
+  }
+
+  .eventos-img img {
+    width: 100% !important;
+    height: 180px !important;
+  }
+}
+</style>

@@ -6,9 +6,9 @@ export default {
     const service = urls.TEACHERS_STATUS;
     return axios
       .get(service)
-      .then((response) => response)
-      .catch((error) => {
-        console.log(error);
+      .then(response => response)
+      .catch(error => {
+        // console.log(error);
       });
   },
 };

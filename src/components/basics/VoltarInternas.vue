@@ -4,28 +4,26 @@
     | Voltar
 </template>
 
-<style lang="scss" scoped>
-
-  i.fa.fa-chevron-circle-left {
-    margin-right: 5px;
-    font-size: 18px;
-  }
-
-  a.back {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-  }
-
-</style>
-
 <script>
-  export default {
-    methods: {
-      historyBack() {
-        window.history.back();
-      }
-    }
-  };
+export default {
+  methods: {
+    historyBack() {
+      window.history.back();
+    },
+  },
+};
 </script>
+
+<style lang="scss" scoped>
+i.fa.fa-chevron-circle-left {
+  margin-right: 5px;
+  font-size: 18px;
+}
+
+a.back {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+</style>

@@ -9,18 +9,14 @@
       disciplinas
 </template>
 
-<style lang="scss">
-
-</style>
-
 <script>
-import Disciplinas from '@MODULES/DisciplinasLista';
-import Titulo from '@BASICS/Titulo';
+import Disciplinas from "@MODULES/DisciplinasLista";
+import Titulo from "@BASICS/Titulo";
 
 export default {
   components: {
     Disciplinas,
-    Titulo
-  }
+    Titulo,
+  },
 };
 </script>

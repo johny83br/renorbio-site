@@ -20,148 +20,147 @@
           parceiros(:breakpoints='[[768, 3], [1024, 5]]')
 </template>
 
-<style lang="scss">
+<script>
+import DisciplinasOfertadas from "@MODULES/DisciplinasOfertadas";
+import Eventos from "@MODULES/Eventos";
+import IndexIntro from "@BASICS/IndexIntro";
+import Noticias from "@MODULES/Noticias";
+import Parceiros from "@MODULES/Parceiros";
+import ProcessoSeletivo from "@MODULES/ProcessoSeletivo";
 
+import * as config from "../../scripts/config";
+
+export default {
+  components: {
+    DisciplinasOfertadas,
+    Eventos,
+    IndexIntro,
+    Noticias,
+    Parceiros,
+    ProcessoSeletivo,
+  },
+  head: {
+    title() {
+      return {
+        inner: `${config.SITE_TITLE} - Página Principal`,
+      };
+    },
+    meta: [
+      {
+        name: "description",
+        content: config.SITE_DESC,
+        id: "description",
+      },
+    ],
+  },
+};
+</script>
+
+<style lang="scss">
+section.top {
+  margin: 20px 0;
+  display: flex;
+}
+
+.top .left {
+  border-right: 1px solid rgba(0, 0, 0, 0.3);
+  padding-right: 25px;
+  padding-bottom: 25px;
+  min-height: 170px;
+  width: 65%;
+}
+
+.top .right {
+  padding-left: 25px;
+  padding-bottom: 25px;
+  width: 35%;
+}
+
+section.bottom {
+  background-color: $cor-azul-2;
+}
+
+.bottom {
+  padding: 20px 0;
+}
+
+.bottom .left {
+  border-right: 1px solid rgba(0, 0, 0, 0.3);
+  padding-right: 25px;
+  padding-bottom: 25px;
+}
+
+.bottom .right {
+  padding-left: 25px;
+  padding-bottom: 25px;
+}
+
+.more a {
+  font-size: 12px;
+  color: $cor-azul-1;
+}
+
+.more a:hover {
+  text-decoration: underline;
+}
+
+.more:before {
+  content: "";
+  margin: 0 10px;
+  opacity: 0.3;
+  border-left: 1px solid $cor-cinza;
+}
+
+.container.parceiros {
+  margin-bottom: 30px;
+}
+
+@include media("<992px") {
   section.top {
-    margin: 20px 0;
-    display: flex;
+    flex-direction: column;
   }
 
   .top .left {
-    border-right: 1px solid rgba(0, 0, 0, .3);
-    padding-right: 25px;
-    padding-bottom: 25px;
-    min-height: 170px;
-    width: 65%;
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    padding-right: 0;
   }
 
   .top .right {
-    padding-left: 25px;
-    padding-bottom: 25px;
-    width: 35%
+    padding-left: 0;
   }
 
-  section.bottom {
-    background-color: $cor-azul-2;
+  .top .left,
+  .top .right {
+    width: 100%;
   }
+}
 
-  .bottom {
-    padding: 20px 0;
-  }
-
+@include media("<=tablet") {
   .bottom .left {
-    border-right: 1px solid rgba(0, 0, 0, .3);
-    padding-right: 25px;
-    padding-bottom: 25px;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    padding-right: 15px;
+    padding-bottom: 30px;
   }
 
   .bottom .right {
-    padding-left: 25px;
-    padding-bottom: 25px;
+    padding-left: 15px;
+    margin-top: 10px;
+  }
+}
+
+@include media("<tablet") {
+  .top .left,
+  .bottom .left {
+    border: none;
+    padding-bottom: 10px;
   }
 
-  .more a {
-    font-size: 12px;
-    color: $cor-azul-1;
+  div#noticias,
+  div#processoSeletivo {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    padding-bottom: 30px !important;
   }
-
-  .more a:hover {
-    text-decoration: underline;
-  }
-
-  .more:before {
-    content: '';
-    margin: 0 10px;
-    opacity: 0.3;
-    border-left: 1px solid $cor-cinza;
-  }
-
-  .container.parceiros {
-    margin-bottom: 30px;
-  }
-
-  @include media("<992px") {
-    section.top {
-      flex-direction: column;
-    }
-
-    .top .left {
-      border-right: none;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-      padding-right: 0;
-    }
-
-    .top .right {
-      padding-left: 0;
-    }
-
-    .top .left,
-    .top .right {
-      width: 100%;
-    }
-  }
-
-  @include media("<=tablet") {
-
-    .bottom .left {
-      border: none;
-      border-bottom: 1px solid rgba(0, 0, 0, .3);
-      padding-right: 15px;
-      padding-bottom: 30px;
-    }
-
-    .bottom .right {
-      padding-left: 15px;
-      margin-top: 10px;
-    }
-  }
-
-  @include media("<tablet") {
-    .top .left,
-    .bottom .left {
-      border: none;
-      padding-bottom: 10px;
-    }
-
-    div#noticias,
-    div#processoSeletivo {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-      padding-bottom: 30px !important;
-    }
-  }
-
+}
 </style>
-
-<script>
-  import DisciplinasOfertadas from '@MODULES/DisciplinasOfertadas';
-  import Eventos from '@MODULES/Eventos';
-  import IndexIntro from '@BASICS/IndexIntro';
-  import Noticias from '@MODULES/Noticias';
-  import Parceiros from '@MODULES/Parceiros';
-  import ProcessoSeletivo from '@MODULES/ProcessoSeletivo';
-
-  import * as config from '../../scripts/config';
-
-  export default {
-    components: {
-      DisciplinasOfertadas,
-      Eventos,
-      IndexIntro,
-      Noticias,
-      Parceiros,
-      ProcessoSeletivo
-    },
-    head: {
-      title() {
-        return {
-          inner: `${config.SITE_TITLE} - Página Principal`
-        };
-      },
-      meta: [
-        {
-          name: 'description', content: config.SITE_DESC, id: 'description'
-        }
-      ]
-    }
-  };
-</script>

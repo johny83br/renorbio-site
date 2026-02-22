@@ -7,14 +7,14 @@ export default {
     Vue.use(VueResource);
     return Vue.http
       .post(urls.URL_ENVIA_EMAIL, postData)
-      .then((response) => {
+      .then(response => {
         if (response.status === 201) {
           return response.body;
         }
         return null;
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(error => {
+        // console.log(error);
       });
   },
 };

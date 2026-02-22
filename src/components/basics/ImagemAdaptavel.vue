@@ -30,12 +30,12 @@
     },
     computed: {
       figureClasses() {
-        let classes = ""
+        let classes = "";
         if (this.isFullWidth) {
-          classes += "full-width"
+          classes += "full-width";
         }
 
-        return classes
+        return classes;
       }
     }
   };

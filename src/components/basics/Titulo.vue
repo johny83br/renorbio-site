@@ -3,22 +3,16 @@
 </template>
 
 <style lang="scss" scoped>
+.titulo {
+  font-size: $titulos-font-size;
+  font-weight: $titulos-font-weight;
+  color: $cor-cinza;
+  margin-bottom: 35px;
+}
 
+@include media("<=tablet") {
   .titulo {
-    font-size: $titulos-font-size;
-    font-weight: $titulos-font-weight;
-    color: $cor-cinza;
-    margin-bottom: 35px;
+    margin-bottom: 30px;
   }
-
-  @include media("<=tablet") {
-    .titulo {
-      margin-bottom: 30px;
-    }
-  }
-
+}
 </style>
-
-<script>
-
-</script>

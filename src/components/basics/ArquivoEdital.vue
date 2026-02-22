@@ -4,23 +4,17 @@
 </template>
 
 <style lang="scss">
+.arquivo {
+  margin-bottom: 20px;
+}
 
-  .arquivo {
-    margin-bottom: 20px;
-  }
+.arquivo a {
+  text-transform: uppercase;
+  font-weight: $titulos-font-weight;
+  color: $cor-azul-1;
+}
 
-  .arquivo a {
-    text-transform: uppercase;
-    font-weight: $titulos-font-weight;
-    color: $cor-azul-1;
-  }
-
-  .arquivo a:hover {
-    text-decoration: underline;
-  }
-
+.arquivo a:hover {
+  text-decoration: underline;
+}
 </style>
-
-<script>
-
-</script>

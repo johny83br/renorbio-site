@@ -8,70 +8,72 @@
       .documentos.loading-effect
 </template>
 
-<style lang="scss" scoped>
-  .container{
-    padding-bottom: 20px;
-  }
-  .label-select{
-    padding: 6px 0;
-  }
-</style>
-
 <script>
-  import Breadcrumb from '@MODULES/Breadcrumb';
-  import Titulo from '@BASICS/Titulo';
-  import ListaCategorias from '@BASICS/ListaCategorias';
+import Breadcrumb from "@MODULES/Breadcrumb";
+import Titulo from "@BASICS/Titulo";
+import ListaCategorias from "@BASICS/ListaCategorias";
 
-  import DocumentosService from '../../scripts/services/DocumentosService';
+import { getCategorias } from "../../scripts/services/DocumentosService";
 
-  import * as config from '../../scripts/config';
+import * as config from "../../scripts/config";
 
-  export default {
-    components: {
-      Breadcrumb,
-      Titulo,
-      ListaCategorias
-    },
-    data() {
+export default {
+  components: {
+    Breadcrumb,
+    Titulo,
+    ListaCategorias,
+  },
+  data() {
+    return {
+      breadcrumb: [{ nome: "Documentos" }],
+      documentos: [],
+      loading: true,
+    };
+  },
+  head: {
+    title() {
       return {
-        breadcrumb: [
-          { nome: 'Documentos' }
-        ],
-        documentos: [],
-        loading: true
+        inner: `${config.SITE_TITLE} - Documentos`,
       };
     },
-    head: {
-      title() {
-        return {
-          inner: `${config.SITE_TITLE} - Documentos`
-        };
+    meta: [
+      {
+        name: "description",
+        content: config.SITE_DESC,
+        id: "description",
       },
-      meta: [
-        {
-          name: 'description', content: config.SITE_DESC, id: 'description'
-        }
-      ]
+    ],
+  },
+  created() {
+    this.getDocumentos();
+  },
+  methods: {
+    async getDocumentos() {
+      const documentosTratados = [];
+
+      const categorias = await getCategorias();
+
+      Object.entries(categorias).forEach(v => {
+        const i = v[0];
+        const documentoTratado = {
+          name: categorias[i].name,
+          id: categorias[i].id,
+        };
+        documentosTratados.push(documentoTratado);
+      });
+
+      this.documentos = documentosTratados;
+      this.loading = false;
     },
-    created() {
-      this.getDocumentos();
-    },
-    methods: {
-      getDocumentos() {
-        const documentosTratados = [];
-        DocumentosService.getCategorias()
-          .then(response => {
-            for (let i = 0; i < response.data.length; i++) {
-              const documentoTratado = {
-                name: response.data[i].name,
-                id: response.data[i].id
-              };
-              documentosTratados.push(documentoTratado);
-            }
-            this.documentos = documentosTratados;
-            this.loading = false;
-          });
-      }
-    }
-  };
+  },
+};
 </script>
+
+<style lang="scss" scoped>
+.container {
+  padding-bottom: 20px;
+}
+.label-select {
+  padding: 6px 0;
+}
+</style>

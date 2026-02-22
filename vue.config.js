@@ -1,22 +1,22 @@
-const path = require('path');
+const path = require("path");
 
-function resolve (dir) {
-  return path.join(__dirname, dir)
+function resolve(dir) {
+  return path.join(__dirname, dir);
 }
 
 module.exports = {
-  publicPath: '/',
+  publicPath: "/",
   productionSourceMap: false,
   configureWebpack: {
     resolve: {
       alias: {
-        'vue$': 'vue/dist/vue.esm.js',
-        '@BASICS': resolve('src/components/basics'),
-        '@MODULES' : resolve('src/components/modules/'),
-        '@PAGES': resolve('src/components/pages'),
-        '@STYLES': resolve('src/styles/')
-      }
-    }
+        vue$: "vue/dist/vue.esm.js",
+        "@BASICS": resolve("src/components/basics"),
+        "@MODULES": resolve("src/components/modules/"),
+        "@PAGES": resolve("src/components/pages"),
+        "@STYLES": resolve("src/styles/"),
+      },
+    },
   },
   css: {
     loaderOptions: {
@@ -30,6 +30,14 @@ module.exports = {
   },
   chainWebpack: config => {
     // remove the prefetch plugin
-    config.plugins.delete('prefetch');
+    config.plugins.delete("prefetch");
+    config.module
+      .rule("vue")
+      .use("vue-loader")
+      .loader("vue-loader")
+      .tap(options => {
+        options.compilerOptions.whitespace = "preserve"; // or 'condense'
+        return options;
+      });
   },
 };

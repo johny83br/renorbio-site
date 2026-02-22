@@ -2,12 +2,12 @@
   .busca-feedback
     p Exibindo resultados para:
       |
-      strong {{feedback}}
+      strong  {{feedback}}
 </template>
 
 <script>
 export default {
-  props: ['feedback']
+  props: ["feedback"],
 };
 </script>
 

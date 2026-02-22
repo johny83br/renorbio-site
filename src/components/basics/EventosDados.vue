@@ -34,42 +34,47 @@
           span {{email}}
 </template>
 
-<style lang="scss" scoped>
-
-  .dados {
-    border: 2px solid $cor-azul-1;
-    padding: 10px 15px;
-  }
-
-  .dados a {
-    color: $cor-cinza;
-    text-decoration: underline;
-  }
-
-  .dados a:hover {
-    color: $cor-azul-1;
-  }
-
-  p {
-    color: $cor-azul-1;
-    margin: 5px;
-    word-break: break-all;
-  }
-
-  span {
-    color: $cor-cinza;
-  }
-
-  .fa-map-marker {
-    margin-left: 10px;
-  }
-
-</style>
-
 <script>
-
-  export default {
-    props: ['onde', 'horario', 'site', 'inicio', 'fim', 'telefone', 'email', 'local']
-  };
-
+export default {
+  props: [
+    "onde",
+    "horario",
+    "site",
+    "inicio",
+    "fim",
+    "telefone",
+    "email",
+    "local",
+  ],
+};
 </script>
+
+<style lang="scss" scoped>
+.dados {
+  border: 2px solid $cor-azul-1;
+  padding: 10px 15px;
+}
+
+.dados a {
+  color: $cor-cinza;
+  text-decoration: underline;
+}
+
+.dados a:hover {
+  color: $cor-azul-1;
+}
+
+p {
+  color: $cor-azul-1;
+  margin: 5px;
+  word-break: break-all;
+}
+
+span {
+  color: $cor-cinza;
+}
+
+.fa-map-marker {
+  margin-left: 10px;
+}
+</style>

@@ -20,116 +20,110 @@
 </template>
 
 <script>
-export default {
-};
+export default {};
 </script>
 
 <style lang="scss" scoped>
+section#intro {
+  background-color: $cor-azul-2;
+}
 
-  section#intro {
-    background-color: $cor-azul-2;
-  }
+.container {
+  padding: 40px 0px;
+  display: flex;
+}
 
-  .container {
-    padding: 40px 0px;
-    display: flex;
-  }
+.titulo {
+  margin-right: 30px;
+  margin-bottom: 20px;
+  float: left;
+}
 
+.conteudo {
+  margin: 0 85px;
+}
+
+.titulo h3,
+h1 {
+  margin: 0;
+  font-weight: bold;
+}
+
+p {
+  margin: 0;
+}
+
+h3 {
+  font-size: 25px;
+}
+
+h1 {
+  font-size: 35px;
+  color: $cor-azul-1;
+}
+
+a.btn.btn-custom {
+  background-color: $cor-azul-1;
+  color: $cor-branco;
+  font-size: 14px;
+  border: none;
+  height: 30px;
+  width: 165px;
+  border-radius: 15px;
+  //margin-top: 25px;
+  opacity: 0.8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 25px auto 0 auto;
+}
+
+a.btn.btn-custom:hover {
+  opacity: 1;
+}
+
+@include media("<tablet") {
   .titulo {
-    margin-right: 30px;
-    margin-bottom: 20px;
-    float: left;
+    text-align: left !important;
   }
 
   .conteudo {
-    margin: 0 85px;
+    text-align: left !important;
+    margin: 0 15px;
+    padding: 0 15px;
   }
 
-  .titulo h3, h1 {
-    margin: 0;
-    font-weight: bold;
-  }
-
-  p {
-    margin: 0;
-  }
-
-  h3 {
-    font-size: 25px;
-  }
-
-  h1 {
-    font-size: 35px;
-    color: $cor-azul-1;
+  .conteudo p {
+    padding: 0;
   }
 
   a.btn.btn-custom {
-    background-color: $cor-azul-1;
-    color: $cor-branco;
-    font-size: 14px;
-    border: none;
-    height: 30px;
-    width: 165px;
-    border-radius: 15px;
-    //margin-top: 25px;
-    opacity: 0.8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 25px auto 0 auto;
+    margin: 25px 0 0 0;
   }
 
-  a.btn.btn-custom:hover {
-    opacity: 1;
+  .conteudo {
+    margin: 0 !important;
+  }
+}
+
+@include media("<=tablet") {
+  .container {
+    flex-direction: column;
   }
 
-  @include media ("<tablet") {
-
-    .titulo {
-      text-align: left !important;
-    }
-
-    .conteudo {
-      text-align: left !important;
-      margin: 0 15px;
-      padding: 0 15px;
-    }
-
-    .conteudo p {
-        padding: 0;
-    }
-
-    a.btn.btn-custom {
-      margin: 25px 0 0 0;
-    }
-
-    .conteudo {
-      margin: 0 !important;
-    }
-
+  .titulo,
+  .conteudo {
+    margin: 0 0 25px 0;
+    width: 100%;
+    text-align: center;
   }
 
-  @include media("<=tablet") {
-
-    .container {
-      flex-direction: column;
-    }
-
-    .titulo,
-    .conteudo {
-      margin: 0 0 25px 0;
-      width: 100%;
-      text-align: center;
-    }
-
-    .conteudo {
-      margin: 0 !important;
-    }
-
-    p {
-      padding: 0 15px;
-    }
-
+  .conteudo {
+    margin: 0 !important;
   }
 
+  p {
+    padding: 0 15px;
+  }
+}
 </style>

@@ -3,17 +3,11 @@
 </template>
 
 <style lang="scss" scoped>
+p {
+  margin: 0;
+}
 
- p {
-   margin: 0;
- }
-
- .descricao {
-   margin: 15px 0;
- }
-
+.descricao {
+  margin: 15px 0;
+}
 </style>
-
-<script>
-
-</script>

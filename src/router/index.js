@@ -1,32 +1,32 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from 'vue';
+import Router from 'vue-router';
 
 // Importando componentes de páginas
-import Index from "@/components/pages/Index"
-import CadastroUsuario from "@/components/pages/CadastroUsuario"
-import Contato from "@/components/pages/Contato"
-import Evento from "@/components/pages/Evento"
-import Eventos from "@/components/pages/Eventos"
-import Noticia from "@/components/pages/Noticia"
-import Noticias from "@/components/pages/Noticias"
-import PaginaExtra from "@/components/pages/PaginaExtra"
-import ProcessoSeletivo from "@/components/pages/ProcessoSeletivo"
-import DisciplinasDoPrograma from "@/components/pages/DisciplinasDoPrograma"
-import DisciplinasOfertadas from "@/components/pages/DisciplinasOfertadas"
-import Documentos from "@/components/pages/Documentos"
-import Documento from "@/components/pages/Documento"
-import RenorbioNaMidia from "@/components/pages/RenorbioNaMidia"
-import Sobre from "@/components/pages/Sobre"
-import Unidades from "@/components/pages/Unidades"
-import CorpoDocente from "@/components/pages/CorpoDocente"
-import Laboratorios from "@/components/pages/Laboratorios"
-import Generica from "@/components/pages/Generica"
-import MapaDoSite from "@/components/pages/MapaDoSite"
-import Galeria from "@/components/pages/Galeria"
-import Album from "@/components/pages/Album"
-import Busca from "@/components/pages/Busca"
+import Index from "@/components/pages/Index";
+import CadastroUsuario from "@/components/pages/CadastroUsuario";
+import Contato from "@/components/pages/Contato";
+import Evento from "@/components/pages/Evento";
+import Eventos from "@/components/pages/Eventos";
+import Noticia from "@/components/pages/Noticia";
+import Noticias from "@/components/pages/Noticias";
+import PaginaExtra from "@/components/pages/PaginaExtra";
+import ProcessoSeletivo from "@/components/pages/ProcessoSeletivo";
+import DisciplinasDoPrograma from "@/components/pages/DisciplinasDoPrograma";
+import DisciplinasOfertadas from "@/components/pages/DisciplinasOfertadas";
+import Documentos from "@/components/pages/Documentos";
+import Documento from "@/components/pages/Documento";
+import RenorbioNaMidia from "@/components/pages/RenorbioNaMidia";
+import Sobre from "@/components/pages/Sobre";
+import Unidades from "@/components/pages/Unidades";
+import CorpoDocente from "@/components/pages/CorpoDocente";
+import Laboratorios from "@/components/pages/Laboratorios";
+import Generica from "@/components/pages/Generica";
+import MapaDoSite from "@/components/pages/MapaDoSite";
+import Galeria from "@/components/pages/Galeria";
+import Album from "@/components/pages/Album";
+import Busca from "@/components/pages/Busca";
 
-Vue.use(Router)
+Vue.use(Router);
 
 const router = new Router({
   mode: 'hash', // MUDANÇA PRINCIPAL: usa hash mode para evitar erro 404 no servidor
@@ -159,6 +159,6 @@ const router = new Router({
       redirect: '/'
     }
   ]
-})
+});
 
-export default router
+export default router;

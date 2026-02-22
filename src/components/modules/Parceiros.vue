@@ -65,8 +65,27 @@
 
 </template>
 
-<style lang="scss">
+<script>
+import Titulo from "@BASICS/Titulo";
+import { Carousel, Slide } from "vue-carousel";
 
+export default {
+  components: {
+    Carousel,
+    Titulo,
+    Slide,
+  },
+  props: ["breakpoints"],
+  data() {
+    return {
+      proximo: '<i class="fa fa-chevron-circle-right carousel-arrows">',
+      anterior: '<i class="fa fa-chevron-circle-left carousel-arrows">',
+    };
+  },
+};
+</script>
+
+<style lang="scss">
 .VueCarousel-slide {
   text-align: center;
 }
@@ -100,25 +119,4 @@ div#parceiros .conteudo {
     padding: 0 20px;
   }
 }
-
 </style>
-
-<script>
-import Titulo from '@BASICS/Titulo';
-import { Carousel, Slide } from 'vue-carousel';
-
-export default {
-  components: {
-    Carousel,
-    Titulo,
-    Slide
-  },
-  props: ['breakpoints'],
-  data() {
-    return {
-      proximo: '<i class="fa fa-chevron-circle-right carousel-arrows">',
-      anterior: '<i class="fa fa-chevron-circle-left carousel-arrows">'
-    };
-  }
-};
-</script>
