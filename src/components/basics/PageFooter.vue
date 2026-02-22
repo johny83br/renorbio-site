@@ -40,7 +40,7 @@
             | Linkedin
 
     .container.rodape-sinfo
-      a(href='http://info.ufrn.br/' target='_blank' noopener title="Ir para o site da Superintendência de Tecnologia da Informação da UFRN") Desenvolvido pela STI/UFRN
+      | Desenvolvido pela <a href='http://info.ufrn.br/' target='_blank' noopener title="Ir para o site da Superintendência de Tecnologia da Informação da UFRN">STI/UFRN</a> e mantido por <a href="mailto:jonata.marcelino83@gmail.com" noopener>Jônata Marcelino</a>
 </template>
 
 <script>
@@ -49,8 +49,8 @@ export default {
   methods: {
     backTop: () => {
       window.scrollTo(0, 0);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -111,13 +111,17 @@ i.fa-linkedin {
   display: flex;
   justify-content: flex-end;
   padding-bottom: 15px;
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-size: 14px;
+  margin-top: 5px;
 }
 
 .rodape-sinfo a {
   color: rgba(255, 255, 255, 0.5) !important;
   text-decoration: none;
   font-size: 14px;
-  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
 
   &:hover,
   &:focus {
