@@ -22,7 +22,7 @@ import Pagina from "@BASICS/Pagina";
 
 import Lightbox from "vue-image-lightbox";
 
-import GaleriaService from "../../scripts/services/GaleriaService";
+import { getFotos } from "../../scripts/services/GaleriaService";
 
 import * as config from "../../scripts/config";
 
@@ -63,33 +63,32 @@ export default {
       },
     ],
   },
-  mounted() {
+  async mounted() {
     this.slug = this.$route.params.slug ? this.$route.params.slug : "";
-    this.loadFotos(this.slug);
+    await this.loadFotos(this.slug);
   },
   methods: {
-    loadFotos(slug) {
-      GaleriaService.getFotos(slug).then(galeriasDados => {
-        this.titulo = galeriasDados.title.rendered;
-        this.descricao = galeriasDados.acf.descricao;
-        this.data = galeriasDados.date;
-        for (let i = 0; i < galeriasDados.acf.fotos.length; i++) {
-          const fotoTratada = {
-            thumb: galeriasDados.acf.fotos[i].acf.anexo
-              ? galeriasDados.acf.fotos[i].acf.anexo
-              : galeriasDados.acf.fotos[i].acf.link,
-            src: galeriasDados.acf.fotos[i].acf.anexo
-              ? galeriasDados.acf.fotos[i].acf.anexo
-              : galeriasDados.acf.fotos[i].acf.link,
-            caption: galeriasDados.acf.fotos[i].acf.legenda_foto,
-          };
-          if (fotoTratada.src === false) {
-            fotoTratada.src = fotoTratada.link;
-          }
-          this.images.push(fotoTratada);
-          this.loading = false;
+    async loadFotos(slug) {
+      const fotos = await getFotos(slug);
+
+      this.titulo = fotos.title.rendered;
+      this.descricao = fotos.acf.descricao;
+      this.data = fotos.date;
+
+      Object.entries(fotos.acf.fotos).forEach(v => {
+        const foto = v[1];
+        const fotoTratada = {
+          thumb: foto.acf.anexo ? foto.acf.anexo : foto.acf.link,
+          src: foto.acf.anexo ? foto.acf.anexo : foto.acf.link,
+          caption: foto.acf.legenda_foto,
+        };
+        if (fotoTratada.src === false) {
+          fotoTratada.src = fotoTratada.link;
         }
+        this.images.push(fotoTratada);
       });
+
+      this.loading = false;
     },
     openGallery(index) {
       this.$refs.lightbox.showImage(index);
