@@ -104,12 +104,14 @@ export default {
   watch: {
     filter(data) {
       const nameUf = data.name;
-      if (nameUf !== this.optionsInput[0].name && nameUf !== "") {
+      if (nameUf !== this.optionsInput[0]?.name && nameUf !== "") {
         this.listaFiltrada = window._.orderBy(
-          window._.filter(
-            this.listaItens,
-            obj => obj.key.uf.indexOf(nameUf) !== -1,
-          ),
+          window._.filter(this.listaItens, obj => {
+            if (obj.key) {
+              return obj.key.uf.indexOf(nameUf) !== -1;
+            }
+            return false;
+          }),
           ["name"],
           ["asc"],
         );
