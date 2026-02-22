@@ -26,8 +26,6 @@ export default {
 
       const areas = await getAreas();
 
-      if (areas.length === 0) return;
-
       Object.entries(areas).forEach(v => {
         const i = v[0];
         const areaTratada = {
