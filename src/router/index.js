@@ -143,7 +143,7 @@ const router = new Router({
       component: Galeria,
     },
     {
-      path: "/galeria/:id",
+      path: "/galeria/:slug",
       name: "Album",
       component: Album,
     },

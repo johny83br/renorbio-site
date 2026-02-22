@@ -6,7 +6,7 @@
     ul.lightbox
       li(v-for="(image, index) in images" style="display: inline-block")
         img(:title="'Abrir a imagem'" :alt="image.caption" v-lazy="image.src" style="height: 100px" @click="openGallery(index)")
-    lightbox(:id=" 'mylightbox' " :images="images" :options="options" ref="lightbox" :show-caption="true" :showLightBox="false")
+    lightbox(:id=" 'mylightbox' " :media="images" :options="options" ref="lightbox" :show-caption="true" :showLightBox="false")
   .container.album(v-else)
     breadcrumb(slot="breadcrumb", :itens="this.breadcrumb")
     .header-loading
