@@ -11,7 +11,7 @@ import Titulo from "@BASICS/Titulo";
 import Pagina from "@BASICS/Pagina";
 import Artigo from "@BASICS/Artigo";
 
-import PaginaExtraService from "../../scripts/services/PaginaExtraService";
+import { getPagina } from "../../scripts/services/PaginaExtraService";
 
 import * as config from "../../scripts/config";
 
@@ -62,11 +62,10 @@ export default {
     this.slug = this.$route.params.slug ? this.$route.params.slug : "";
   },
   methods: {
-    loadPagina(slug) {
-      PaginaExtraService.getPagina(slug).then(paginaDados => {
-        this.pagina.titulo = paginaDados.title.rendered;
-        this.pagina.corpo = paginaDados.acf.descricao;
-      });
+    async loadPagina(slug) {
+      const paginaDados = await getPagina(slug);
+      this.pagina.titulo = paginaDados.title.rendered;
+      this.pagina.corpo = paginaDados.acf.descricao;
     },
     getAsyncData() {
       const self = this;

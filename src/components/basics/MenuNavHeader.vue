@@ -6,7 +6,7 @@
           Renorbio #[i.fa.fa-caret-down(aria-hidden="true")]
         transition(name="fademenu")
           .sub-menu(v-show="submenu1IsOpened")
-            router-link.link(:to="{ name: 'Generica', params: { slug: 'o-que-e-biotecnologia', id: 1} }" :tabindex="tab") Sobre a Rede
+            router-link.link(:to="{ name: 'Generica', params: { slug: 'sobre-a-rede'} }" :tabindex="tab") Sobre a Rede
             router-link.link(:to="{ name: 'CorpoDocente' }" :tabindex="tab") Corpo Docente
             router-link.link(:to="{ name: 'Unidades' }" :tabindex="tab") Unidades
       li
