@@ -24,7 +24,7 @@ import EventosLista from "@MODULES/EventosLista";
 import Mensagem from "@BASICS/Mensagem";
 import Titulo from "@BASICS/Titulo";
 
-import EventosService from "../../scripts/services/EventoService";
+import { getEventos } from "../../scripts/services/EventoService";
 
 import Data from "../../scripts/utils/Data";
 
@@ -48,47 +48,51 @@ export default {
     $route(to, from) {
       this.eventos = this.loadEventos(this.perPage, to.params.page, this.tag);
     },
-    tag() {
-      this.eventos = this.loadEventos(this.perPage, this.page, this.tag);
+    async tag() {
+      this.eventos = await this.loadEventos(this.perPage, this.page, this.tag);
     },
   },
-  mounted() {
-    this.page = this.$route.params.page ? this.$route.params.page : 1;
-    this.tag = this.$route.params.tag ? this.$route.params.tag : "";
-    this.eventos = this.loadEventos(this.perPage, this.page, this.tag);
+  async mounted() {
+    this.page = this.$route.query.page ? this.$route.query.page : 1;
+    this.tag = this.$route.query.tag ? this.$route.query.tag : "";
+    this.eventos = await this.loadEventos(this.perPage, this.page, this.tag);
   },
   beforeUpdate() {
-    this.page = this.$route.params.page ? this.$route.params.page : 1;
-    this.tag = this.$route.params.tag ? this.$route.params.tag : "";
+    this.page = this.$route.query.page ? this.$route.query.page : 1;
+    this.tag = this.$route.query.tag ? this.$route.query.tag : "";
   },
   methods: {
-    loadEventos(perPage = 5, page = 1, tag = "") {
+    async loadEventos(perPage = 5, page = 1, tag = "") {
       const eventosTratados = [];
-      EventosService.getEventos(perPage, page, tag).then(eventosDados => {
-        eventosDados.data.forEach(evento => {
-          const eventoTratado = {
-            id: evento.id,
-            titulo: evento.title.rendered,
-            inicio: Data.dataInversa(evento.acf.data_inicio),
-            fim: evento.acf.data_fim
-              ? Data.dataInversa(evento.acf.data_fim)
-              : false,
-            cover: evento.featured_media
-              ? evento._embedded["wp:featuredmedia"][0].source_url
-              : "imagem_padrao.png",
-            legenda: evento.featured_media
-              ? evento._embedded["wp:featuredmedia"][0].caption.rendered
-              : "",
-          };
-          eventosTratados.push(eventoTratado);
-        });
-        this.totaleventos = parseInt(eventosDados.headers["x-wp-total"]);
-        this.totalPages = parseInt(eventosDados.headers["x-wp-totalpages"]);
-        if (eventosTratados.length === 0) {
-          this.naoTemEventos = true;
-        }
-        this.loading = false;
+
+      const eventos = await getEventos(perPage, page, tag);
+
+      Object.entries(eventos.data).forEach(v => {
+        const evento = v[1];
+        const eventoTratado = {
+          id: evento.id,
+          titulo: evento.title.rendered,
+          inicio: Data.dataInversa(evento.acf.data_inicio),
+          fim: evento.acf.data_fim
+            ? Data.dataInversa(evento.acf.data_fim)
+            : false,
+          cover: evento.featured_media
+            ? evento._embedded["wp:featuredmedia"][0].source_url
+            : "imagem_padrao.png",
+          legenda: evento.featured_media
+            ? evento._embedded["wp:featuredmedia"][0].caption.rendered
+            : "",
+        };
+        eventosTratados.push(eventoTratado);
       });
+
+      this.totaleventos = parseInt(eventos.headers["x-wp-total"]);
+      this.totalPages = parseInt(eventos.headers["x-wp-totalpages"]);
+      if (eventosTratados.length === 0) {
+        this.naoTemEventos = true;
+      }
+      this.loading = false;
+
       return eventosTratados;
     },
   },

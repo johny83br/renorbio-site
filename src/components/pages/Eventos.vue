@@ -39,7 +39,7 @@ import Pagina from "@BASICS/Pagina";
 import Paginate from "vuejs-paginate";
 import Titulo from "@BASICS/Titulo";
 
-import EventosService from "../../scripts/services/EventoService";
+import { getEventos } from "../../scripts/services/EventoService";
 
 import Data from "../../scripts/utils/Data";
 
@@ -81,52 +81,56 @@ export default {
       },
     ],
   },
-  mounted() {
-    this.page = this.$route.params.page ? parseInt(this.$route.params.page) : 1;
-    this.tag = this.$route.params.tag ? this.$route.params.tag : "";
-    this.eventos = this.loadEventos(this.perPage, this.page, this.tag);
+  async mounted() {
+    this.page = this.$route.query.page ? parseInt(this.$route.query.page) : 1;
+    this.tag = this.$route.query.tag ? this.$route.query.tag : "";
+    this.eventos = await this.loadEventos(this.perPage, this.page, this.tag);
   },
   beforeUpdate() {
-    this.page = this.$route.params.page ? parseInt(this.$route.params.page) : 1;
-    this.tag = this.$route.params.tag ? this.$route.params.tag : "";
+    this.page = this.$route.query.page ? parseInt(this.$route.query.page) : 1;
+    this.tag = this.$route.query.tag ? this.$route.query.tag : "";
   },
   methods: {
-    loadEventos(perPage, page = 1, tag = "") {
+    async loadEventos(perPage, page = 1, tag = "") {
       this.loading = true;
       const eventosTratados = [];
-      EventosService.getEventos(perPage, page, tag).then(eventosDados => {
-        eventosDados.data.forEach(evento => {
-          const tagsAtual = [];
-          const eventoTratado = {
-            id: evento.id,
-            titulo: evento.title.rendered,
-            inicio: Data.dataInversa(evento.acf.data_inicio),
-            fim: evento.acf.data_fim
-              ? Data.dataInversa(evento.acf.data_fim)
-              : false,
-            hora: evento.acf.horario,
-            onde: evento.acf.onde,
-            local: evento.acf.local ? evento.acf.local : false,
-            cover: evento.featured_media
-              ? evento._embedded["wp:featuredmedia"][0].source_url
-              : "imagem_padrao.png",
-            tags: tagsAtual,
-          };
-          eventosTratados.push(eventoTratado);
-        });
-        this.totalEventos = parseInt(eventosDados.headers["x-wp-total"]);
-        this.totalPages = parseInt(eventosDados.headers["x-wp-totalpages"]);
-        if (eventosTratados.length === 0) {
-          this.naoTemEventos = true;
-        }
-        this.loading = false;
+
+      const eventos = await getEventos(perPage, page, tag);
+
+      Object.entries(eventos.data).forEach(v => {
+        const evento = v[1];
+        const tagsAtual = [];
+        const eventoTratado = {
+          id: evento.id,
+          titulo: evento.title.rendered,
+          inicio: Data.dataInversa(evento.acf.data_inicio),
+          fim: evento.acf.data_fim
+            ? Data.dataInversa(evento.acf.data_fim)
+            : false,
+          hora: evento.acf.horario,
+          onde: evento.acf.onde,
+          local: evento.acf.local ? evento.acf.local : false,
+          cover: evento.featured_media
+            ? evento._embedded["wp:featuredmedia"][0].source_url
+            : "imagem_padrao.png",
+          tags: tagsAtual,
+        };
+        eventosTratados.push(eventoTratado);
       });
+
+      this.totalEventos = parseInt(eventos.headers["x-wp-total"]);
+      this.totalPages = parseInt(eventos.headers["x-wp-totalpages"]);
+      if (eventosTratados.length === 0) {
+        this.naoTemEventos = true;
+      }
+      this.loading = false;
+
       return eventosTratados;
     },
-    paginate(pageNum) {
+    async paginate(pageNum) {
       this.page = pageNum;
-      this.$router.push({ params: { page: pageNum } });
-      this.eventos = this.loadEventos(this.perPage, this.page, this.tag);
+      this.$router.push({ query: { page: pageNum } });
+      this.eventos = await this.loadEventos(this.perPage, this.page, this.tag);
     },
   },
 };
