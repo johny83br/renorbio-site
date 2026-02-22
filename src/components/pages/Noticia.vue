@@ -34,139 +34,143 @@
 </template>
 
 <script>
-  import Artigo from '@BASICS/Artigo';
-  import Breadcrumb from '@MODULES/Breadcrumb';
-  import Datapublic from '@BASICS/Data';
-  import Hora from '@BASICS/Hora';
-  import ImagemAdaptavel from '@BASICS/ImagemAdaptavel';
-  import InternasDescricao from '@BASICS/InternasDescricao';
-  import InternasRodape from '@MODULES/InternasRodape';
-  import InternasTitulo from '@BASICS/InternasTitulo';
-  import Pagina from '@BASICS/Pagina';
-  import RedesSociais from '@BASICS/RedesSociais';
-  import Tag from '@BASICS/Tags';
-  import VoltarInternas from '@BASICS/VoltarInternas';
+import Artigo from "@BASICS/Artigo";
+import Breadcrumb from "@MODULES/Breadcrumb";
+import Datapublic from "@BASICS/Data";
+import Hora from "@BASICS/Hora";
+import ImagemAdaptavel from "@BASICS/ImagemAdaptavel";
+import InternasDescricao from "@BASICS/InternasDescricao";
+import InternasRodape from "@MODULES/InternasRodape";
+import InternasTitulo from "@BASICS/InternasTitulo";
+import Pagina from "@BASICS/Pagina";
+import RedesSociais from "@BASICS/RedesSociais";
+import Tag from "@BASICS/Tags";
+import VoltarInternas from "@BASICS/VoltarInternas";
 
-  import NoticiasService from '../../scripts/services/NoticiaService';
+import { getNoticia } from "../../scripts/services/NoticiaService";
 
-  import DataUtil from '../../scripts/utils/Data';
-  import HoraUtil from '../../scripts/utils/Hora';
+import DataUtil from "../../scripts/utils/Data";
+import HoraUtil from "../../scripts/utils/Hora";
 
-  import * as config from '../../scripts/config';
+import * as config from "../../scripts/config";
 
-  export default {
-    components: {
-      Artigo,
-      Breadcrumb,
-      Datapublic,
-      Hora,
-      ImagemAdaptavel,
-      InternasDescricao,
-      InternasRodape,
-      InternasTitulo,
-      Pagina,
-      RedesSociais,
-      Tag,
-      VoltarInternas
-    },
-    data() {
+export default {
+  components: {
+    Artigo,
+    Breadcrumb,
+    Datapublic,
+    Hora,
+    ImagemAdaptavel,
+    InternasDescricao,
+    InternasRodape,
+    InternasTitulo,
+    Pagina,
+    RedesSociais,
+    Tag,
+    VoltarInternas,
+  },
+  data() {
+    return {
+      breadcrumb: [
+        { nome: "Comunicação" },
+        { nome: "Notícias", rota: "Noticias" },
+      ],
+      titulo: "",
+      subtitulo: "",
+      imagem: "",
+      corpo: "",
+      data: "",
+      hora: "",
+      tags: [],
+      autor: "",
+      fonte: "",
+      imagemCaption: "",
+      loading: true,
+    };
+  },
+  head: {
+    title() {
       return {
-        breadcrumb: [
-          { nome: 'Notícias', rota: 'Noticias'}
-        ],
-        titulo: '',
-        subtitulo: '',
-        imagem: '',
-        corpo: '',
-        data: '',
-        hora: '',
-        tags: [],
-        autor: '',
-        fonte: '',
-        imagemCaption: '',
-        loading: true
+        inner: `${config.SITE_TITLE} - ${this.titulo}`,
       };
     },
-    head: {
-      title() {
-        return {
-          inner: `${config.SITE_TITLE} - ${this.titulo}`
-        };
+    meta: [
+      {
+        name: "description",
+        content: config.SITE_DESC,
+        id: "description",
       },
-      meta: [
-        {
-          name: 'description', content: config.SITE_DESC, id: 'description'
+    ],
+  },
+  mounted() {
+    this.loadNoticia(this.$route.params.id);
+    this.getAsyncData();
+  },
+  methods: {
+    async loadNoticia(id) {
+      const noticia = await getNoticia(id);
+
+      this.id = noticia.id;
+      this.titulo = noticia.title.rendered;
+      this.subtitulo = noticia.acf.subtitulo;
+      this.imagem = noticia.featured_media
+        ? noticia._embedded["wp:featuredmedia"][0].source_url
+        : false;
+      this.imagemCaption = noticia.featured_media
+        ? noticia._embedded["wp:featuredmedia"][0].caption.rendered
+        : false;
+      this.data = DataUtil.dataFormatada(noticia.acf.data_de_publicacao * 1000);
+      this.hora = HoraUtil.dataFormatada(noticia.acf.data_de_publicacao * 1000);
+      const tagsAtual = [];
+      if (noticia._embedded) {
+        if (noticia._embedded["wp:term"]) {
+          noticia._embedded["wp:term"][0].forEach(term => {
+            tagsAtual.push({
+              id: term.id,
+              nome: term.name,
+              slug: term.slug,
+            });
+          });
         }
-      ]
-    },
-    mounted() {
-      this.loadNoticia(this.$route.params.id);
-      this.getAsyncData();
-    },
-    methods: {
-      loadNoticia(id) {
-        NoticiasService.getNoticia(id)
-        .then(noticia => {
-          this.id = noticia.id;
-          this.titulo = noticia.title.rendered;
-          this.subtitulo = noticia.acf.subtitulo;
-          this.imagem = (noticia.featured_media) ? noticia._embedded['wp:featuredmedia'][0].source_url : false;
-          this.imagemCaption = (noticia.featured_media) ? noticia._embedded['wp:featuredmedia'][0].caption.rendered : false;
-          this.data = DataUtil.dataFormatada(noticia.acf.data_de_publicacao * 1000);
-          this.hora = HoraUtil.dataFormatada(noticia.acf.data_de_publicacao * 1000);
-          const tagsAtual = [];
-          if (noticia._embedded) {
-            if (noticia._embedded['wp:term']) {
-              noticia._embedded['wp:term'][0].forEach((term) => {
-                tagsAtual.push({
-                  id: term.id,
-                  nome: term.name,
-                  slug: term.slug
-                });
-              });
-            }
-            this.tags = tagsAtual;
-          }
-          this.autor = noticia.acf.autor;
-          this.fonte = noticia.acf.origem;
-          this.corpo = noticia.acf.corpo;
-          this.loading = false;
-        });
-      },
-      getAsyncData() {
-        const self = this;
-        window.setTimeout(() => {
-          self.titulo = self.titulo;
-          self.$emit('updateHead');
-        }, 1000);
+        this.tags = tagsAtual;
       }
-    }
-  };
+      this.autor = noticia.acf.autor;
+      this.fonte = noticia.acf.origem;
+      this.corpo = noticia.acf.corpo;
+      this.loading = false;
+    },
+    getAsyncData() {
+      const self = this;
+      window.setTimeout(() => {
+        self.titulo = self.titulo;
+        self.$emit("updateHead");
+      }, 1000);
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
+.header-infos {
+  margin: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
 
-  .header-infos {
-    margin: 20px 0;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-  }
+p.descricao {
+  font-size: 16px;
+}
 
-  p.descricao {
-    font-size: 16px;
-  }
+.footer {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+}
 
-  .footer {
-    margin-top: 40px;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .autor,
-  .fonte {
-    font-weight: bold;
-    font-size: 12px;
-  }
-
+.autor,
+.fonte {
+  font-weight: bold;
+  font-size: 12px;
+}
 </style>

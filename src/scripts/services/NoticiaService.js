@@ -14,14 +14,12 @@ export function getNoticias(perPage, page = 1, tags = "") {
     });
 }
 
-export default {
-  getNoticia(id) {
-    const service = `${urls.WP_URL}noticias/${id}?_embed`;
-    return axios
-      .get(service)
-      .then(response => response.data)
-      .catch(error => {
-        // console.log(error);
-      });
-  },
-};
+export function getNoticia(id) {
+  const service = `${urls.WP_URL}noticias/${id}?_embed`;
+  return axios
+    .get(service)
+    .then(response => response.data)
+    .catch(error => {
+      // console.log(error);
+    });
+}

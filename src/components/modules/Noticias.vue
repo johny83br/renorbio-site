@@ -24,7 +24,7 @@ import Mensagem from "@BASICS/Mensagem";
 import NoticiasLista from "@MODULES/NoticiasLista";
 import Titulo from "@BASICS/Titulo";
 
-import NoticiasService from "../../scripts/services/NoticiaService";
+import { getNoticias } from "../../scripts/services/NoticiaService";
 
 import Utils from "../../scripts/utils/dataFormatada";
 import Data from "../../scripts/utils/Data";
@@ -54,47 +54,51 @@ export default {
       this.noticias = this.loadNoticias(this.perPage, this.page, this.tag);
     },
   },
-  mounted() {
-    this.page = this.$route.params.page ? this.$route.params.page : 1;
-    this.tag = this.$route.params.tag ? this.$route.params.tag : "";
-    this.noticias = this.loadNoticias(this.perPage, this.page, this.tag);
+  async mounted() {
+    this.page = this.$route.query.page ? this.$route.query.page : 1;
+    this.tag = this.$route.query.tag ? this.$route.query.tag : "";
+    this.noticias = await this.loadNoticias(this.perPage, this.page, this.tag);
   },
   beforeUpdate() {
-    this.page = this.$route.params.page ? this.$route.params.page : 1;
-    this.tag = this.$route.params.tag ? this.$route.params.tag : "";
+    this.page = this.$route.query.page ? this.$route.query.page : 1;
+    this.tag = this.$route.query.tag ? this.$route.query.tag : "";
   },
   methods: {
-    loadNoticias(perPage = 4, page = 1, tag = "") {
+    async loadNoticias(perPage = 4, page = 1, tag = "") {
       const noticiasTratadas = [];
-      NoticiasService.getNoticias(perPage, page, tag).then(noticiasDados => {
-        noticiasDados.data.forEach(noticia => {
-          const noticiaTratada = {
-            id: noticia.id,
-            titulo: noticia.title.rendered,
-            subtitulo: noticia.acf.subtitulo,
-            data_publicacao: Utils.dataFormatada(
-              noticia.acf.data_de_publicacao * 1000,
-            ),
-            data: Data.dataFormatada(noticia.acf.data_de_publicacao * 1000),
-            hora: Hora.dataFormatada(noticia.acf.data_de_publicacao * 1000),
-            resumo: noticia.acf.resumo,
-            url: noticia.slug,
-            cover: noticia.featured_media
-              ? noticia._embedded["wp:featuredmedia"][0].source_url
-              : "imagem_padrao.png",
-            legenda: noticia.featured_media
-              ? noticia._embedded["wp:featuredmedia"][0].caption.rendered
-              : "",
-          };
-          noticiasTratadas.push(noticiaTratada);
-        });
-        this.totalNoticias = parseInt(noticiasDados.headers["x-wp-total"]);
-        this.totalPages = parseInt(noticiasDados.headers["x-wp-totalpages"]);
-        if (noticiasTratadas.length === 0) {
-          this.naoTemNoticias = true;
-        }
-        this.loading = false;
+
+      const noticias = await getNoticias(perPage, page, tag);
+
+      Object.entries(noticias.data).forEach(v => {
+        const noticia = v[1];
+        const noticiaTratada = {
+          id: noticia.id,
+          titulo: noticia.title.rendered,
+          subtitulo: noticia.acf.subtitulo,
+          data_publicacao: Utils.dataFormatada(
+            noticia.acf.data_de_publicacao * 1000,
+          ),
+          data: Data.dataFormatada(noticia.acf.data_de_publicacao * 1000),
+          hora: Hora.dataFormatada(noticia.acf.data_de_publicacao * 1000),
+          resumo: noticia.acf.resumo,
+          url: noticia.slug,
+          cover: noticia.featured_media
+            ? noticia._embedded["wp:featuredmedia"][0].source_url
+            : "imagem_padrao.png",
+          legenda: noticia.featured_media
+            ? noticia._embedded["wp:featuredmedia"][0].caption.rendered
+            : "",
+        };
+        noticiasTratadas.push(noticiaTratada);
       });
+
+      this.totalNoticias = parseInt(noticias.headers["x-wp-total"]);
+      this.totalPages = parseInt(noticias.headers["x-wp-totalpages"]);
+      if (noticiasTratadas.length === 0) {
+        this.naoTemNoticias = true;
+      }
+      this.loading = false;
+
       return noticiasTratadas;
     },
   },
