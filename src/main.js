@@ -12,6 +12,8 @@ import VueTouch from "vue-touch";
 import App from "./App";
 import router from "./router";
 
+Vue.prototype._ = lodash;
+
 Vue.use(VModal);
 
 // Utilizado no Lightbox
@@ -22,7 +24,7 @@ Vue.use(VueTouch, { name: "v-touch" });
 
 Vue.use(lodash);
 window._ = lodash;
-Vue.use(VueLodash);
+Vue.use(VueLodash, { name: "_", lodash });
 
 // // http://vuetips.com/bootstrap e http://www.vedovelli.com.br/frontend/adicionar-bootstrap-e-font-awesome-no-projeto-criado-com-o-vue-cli/
 require("../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss");
