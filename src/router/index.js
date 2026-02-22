@@ -1,5 +1,5 @@
-import Vue from 'vue';
-import Router from 'vue-router';
+import Vue from "vue";
+import Router from "vue-router";
 
 // Importando componentes de páginas
 import Index from "@/components/pages/Index";
@@ -29,17 +29,17 @@ import Busca from "@/components/pages/Busca";
 Vue.use(Router);
 
 const router = new Router({
-  mode: 'hash', // MUDANÇA PRINCIPAL: usa hash mode para evitar erro 404 no servidor
-  base: '/',
+  mode: "hash", // MUDANÇA PRINCIPAL: usa hash mode para evitar erro 404 no servidor
+  base: "/",
   routes: [
     { path: "/", name: "Index", component: Index },
 
     {
-      path: '/academico',
-      name: 'academico',
+      path: "/academico",
+      name: "academico",
       beforeEnter() {
-        window.location.href = 'https://academico.renorbio.org';
-      }
+        window.location.href = "https://academico.renorbio.org";
+      },
     },
 
     {
@@ -83,7 +83,7 @@ const router = new Router({
       component: Noticias,
     },
     {
-      path: "/pagina-extra/:id",
+      path: "/pagina-extra/:slug",
       name: "PaginaExtra",
       component: PaginaExtra,
     },
@@ -155,10 +155,10 @@ const router = new Router({
 
     // Rota coringa para rotas não definidas (opcional)
     {
-      path: '*',
-      redirect: '/'
-    }
-  ]
+      path: "*",
+      redirect: "/",
+    },
+  ],
 });
 
 export default router;
