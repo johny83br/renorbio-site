@@ -24,7 +24,7 @@ export default {
     async getAreas() {
       const areasTratadas = [];
 
-      const areas = getAreas();
+      const areas = await getAreas();
 
       if (areas.length === 0) return;
 
