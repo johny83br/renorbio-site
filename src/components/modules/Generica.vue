@@ -27,7 +27,7 @@ export default {
   },
   data() {
     return {
-      breadcrumb: [{ nome: "Renorbio" }],
+      breadcrumb: [],
       pagina: {
         corpo: "",
         titulo: "",
@@ -85,7 +85,7 @@ export default {
       this.pagina.corpo = paginaDados.acf.descricao;
       this.ready = true;
 
-      this.breadcrumb.push({ nome: this.pagina.titulo });
+      this.breadcrumb = [{ nome: "Renorbio" }, { nome: this.pagina.titulo }];
     },
     getAsyncData() {
       const self = this;
