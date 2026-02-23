@@ -7,14 +7,14 @@
 import VoltarInternas from "@BASICS/VoltarInternas";
 
 export default {
+  components: {
+    VoltarInternas,
+  },
   props: {
     url: {
       type: String,
       required: false,
     },
-  },
-  components: {
-    VoltarInternas,
   },
 };
 </script>
