@@ -25,31 +25,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.breadcrumb {
-  background: transparent;
-}
-
-.breadcrumb {
-  padding: 0;
-}
-
-a.router-link-active,
-li.breadcrumb-item a {
-  color: $cor-cinza;
-}
-
-a.router-link-active:hover,
-li.breadcrumb-item a:hover {
-  color: $cor-azul-1;
-}
-
-#breadcrumb {
-  margin: 30px 0;
-
-  @include media("print") {
-    display: none;
-  }
-}
-</style>

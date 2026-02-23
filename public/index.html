@@ -1,94 +1,116 @@
 <!DOCTYPE html>
-<html lang=pt-br>
+<html lang="pt-br">
+  <head>
+    <base href="/" />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,shrink-to-fit=no"
+    />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta
+      name="description"
+      content="Website da Rede Nordeste de Biotecnologia"
+    />
+    <meta
+      name="designer"
+      content="Caio Gustavo Alves de Lima e João Paulo Rosner Vilar equipesites@info.ufrn.br"
+    />
+    <title></title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel=apple-touch-icon href=apple-touch-icon.png type=image/png
+    sizes=180x180> <link rel=icon href=favicon-32x32.png type=image/png
+    sizes=32x32> <link rel=icon href=favicon-16x16.png type=image/png
+    sizes=16x16>
+    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5" />
 
-<head>
-  <base href="/">
-  <meta charset=utf-8>
-  <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
-  <meta http-equiv=x-ua-compatible content="ie=edge">
-  <meta name=description content="Website da Rede Nordeste de Biotecnologia">
-  <meta name=designer content="Caio Gustavo Alves de Lima e João Paulo Rosner Vilar equipesites@info.ufrn.br">
-  <title></title>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700" rel=stylesheet>
-  <link rel="shortcut icon" href=static/favicon.ico>
-  <link rel=apple-touch-icon href=assets/apple-touch-icon.png type=image/png sizes=180x180>
-  <link rel=icon href=static/favicon-32x32.png type=image/png sizes=32x32>
-  <link rel=icon href=static/favicon-16x16.png type=image/png sizes=16x16>
-  <link rel=mask-icon href=assets/safari-pinned-tab.svg color=#5bbad5>
-
-  <style>
-    /* Estilo para posicionar o tradutor de forma mais harmoniosa */
-    #google_translate_element {
-      position: fixed;
-      top: 60px; /* Aumentei a distância do topo para ficar abaixo do link do portal acadêmico */
-      right: 10px;
-      z-index: 1000;
-      background-color: rgba(255, 255, 255, 0.8);
-      padding: 6px 10px;
-      border-radius: 30px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      transition: opacity 0.3s;
-      font-family: 'Open Sans', sans-serif;
-      font-size: 14px;
-    }
-    
-    #google_translate_element:hover {
-      opacity: 1;
-    }
-    
-    /* Para esconder elementos desnecessários do Google Translate */
-    .goog-te-gadget-icon {
-      display: none !important;
-    }
-    
-    .goog-te-gadget-simple {
-      border: none !important;
-      background-color: transparent !important;
-      padding: 0 !important;
-    }
-    
-    .goog-te-menu-value span:first-child {
-      font-weight: 600;
-      color: #444;
-    }
-    
-    /* Responsividade para dispositivos móveis */
-    @media (max-width: 768px) {
+    <style>
+      /* Estilo para posicionar o tradutor de forma mais harmoniosa */
       #google_translate_element {
-        top: 50px; /* Ajustado também para mobile */
-        right: 5px;
-        padding: 4px 8px;
-        font-size: 12px;
+        position: fixed;
+        top: 60px; /* Aumentei a distância do topo para ficar abaixo do link do portal acadêmico */
+        right: 10px;
+        z-index: 1000;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 6px 10px;
+        border-radius: 30px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: opacity 0.3s;
+        font-family: "Open Sans", sans-serif;
+        font-size: 14px;
       }
-    }
-  </style>
-</head>
 
-<body>
-  <div id="google_translate_element"></div>
-  <div id=app></div>
-  <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'pt',
-        includedLanguages: 'en,es,fr,it',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-        autoDisplay: false
-      }, 'google_translate_element');
-    }
-    
-    // Adiciona evento para esconder parcialmente o tradutor quando não estiver em uso
-    document.addEventListener('DOMContentLoaded', function() {
-      setTimeout(function() {
-        const translateElement = document.getElementById('google_translate_element');
-        if (translateElement) {
-          translateElement.style.opacity = '0.7';
+      #google_translate_element:hover {
+        opacity: 1;
+      }
+
+      /* Para esconder elementos desnecessários do Google Translate */
+      .goog-te-gadget-icon {
+        display: none !important;
+      }
+
+      .goog-te-gadget-simple {
+        border: none !important;
+        background-color: transparent !important;
+        padding: 0 !important;
+      }
+
+      .goog-te-menu-value span:first-child {
+        font-weight: 600;
+        color: #444;
+      }
+
+      /* Responsividade para dispositivos móveis */
+      @media (max-width: 768px) {
+        #google_translate_element {
+          top: 50px; /* Ajustado também para mobile */
+          right: 5px;
+          padding: 4px 8px;
+          font-size: 12px;
         }
-      }, 2000);
-    });
-  </script>
-  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a8b2f71ebdd2ba3"></script>
-</body>
+      }
+    </style>
+  </head>
 
+  <body>
+    <div id="google_translate_element"></div>
+    <div id="app"></div>
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: "pt",
+            includedLanguages: "en,es,fr,it",
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay: false,
+          },
+          "google_translate_element",
+        );
+      }
+
+      // Adiciona evento para esconder parcialmente o tradutor quando não estiver em uso
+      document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(function () {
+          const translateElement = document.getElementById(
+            "google_translate_element",
+          );
+          if (translateElement) {
+            translateElement.style.opacity = "0.7";
+          }
+        }, 2000);
+      });
+    </script>
+    <script
+      type="text/javascript"
+      src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    ></script>
+    <script
+      type="text/javascript"
+      src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a8b2f71ebdd2ba3"
+    ></script>
+  </body>
 </html>

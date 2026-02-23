@@ -1,25 +1,26 @@
 // Coloque aqui as variáveis do projeto SASS
 
 $breakpoints: (
-  'phone': 320px,
-  'tablet': 768px,
-  'desktop': 992px,
-  'desktop-md': 1024px,
-  'desktop-lg': 1440px
+  "phone": 320px,
+  "tablet": 768px,
+  "desktop": 992px,
+  "desktop-md": 1024px,
+  "desktop-lg": 1440px,
 );
 
 // Paleta de Cores
 $cor-preto: #000000;
 $cor-cinza: #323232;
-$cor-cinza-2: #C2C2C2;
+$cor-cinza-2: #c2c2c2;
+$cor-cinza-3: #f5f5f5;
 $cor-azul-1: #242852; //rgb(40, 139, 180)
-$cor-azul-2: #E9F3F7;
+$cor-azul-2: #e9f3f7;
 $cor-azul-3: #242852;
-$cor-azul-4: #C9E2EC;
+$cor-azul-4: #c9e2ec;
 $cor-azul-5: #accbf9;
 $cor-branco: #ffffff;
-$cor-verde: #22C279;
-$cor-vermelho: #FF0000;
+$cor-verde: #22c279;
+$cor-vermelho: #ff0000;
 
 // Variáveis de Padrões
 $padrao-font-family: "Open Sans", sans-serif;
