@@ -12,34 +12,6 @@
   margin: 50px auto 0 auto;
 }
 
-// .pagination > li > a {
-//   border: none;
-//   color: $cor-cinza;
-//   margin: 0 1px;
-// }
-
-// .pagination > li > a:hover {
-//   background-color: transparent;
-// }
-
-// .pagination > .active > a,
-// .pagination > .active > a:hover,
-// .pagination > .active > a:focus {
-//   background-color: $cor-azul-1 !important;
-//   color: $cor-branco !important;
-//   border-radius: 50% !important;
-//   padding: 3px 9px !important;
-//   margin-top: 3px;
-// }
-
-// .pagination > li > a:hover,
-// .pagination > li > a:focus,
-// .pagination > li > span:hover,
-// .pagination > li > span:focus {
-//   background: transparent;
-//   border: none;
-// }
-
 .breadcrumb {
   padding: 8px 15px;
   margin-bottom: 20px;
@@ -64,4 +36,8 @@ li.breadcrumb-item a:hover {
   @include media("print") {
     display: none;
   }
+}
+
+.my-gallery a img {
+  width: 100% !important;
 }
