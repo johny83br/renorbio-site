@@ -11,7 +11,7 @@
 
     .content-tags(slot="principal")
       tag(:itens="tags")
-    internas-rodape(slot="footer")
+    internas-rodape(slot="footer" :url="'/eventos'")
 
   pagina(v-else)
     breadcrumb(slot="breadcrumb", :itens="this.breadcrumb")

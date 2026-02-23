@@ -13,7 +13,7 @@
       artigo(v-html="corpo")
       p.autor(v-if="autor") Autor: {{autor}}
       p.fonte(v-if="fonte") Fonte: {{fonte}}
-    internas-rodape(slot="footer")
+    internas-rodape(slot="footer" :url="'/noticias'")
 
   pagina(v-else)
     breadcrumb(slot="breadcrumb", :itens="this.breadcrumb")

@@ -1,12 +1,18 @@
 <template lang="pug">
   .footer
-    voltar-internas
+    voltar-internas(:url="this.url")
 </template>
 
 <script>
 import VoltarInternas from "@BASICS/VoltarInternas";
 
 export default {
+  props: {
+    url: {
+      type: String,
+      required: false,
+    },
+  },
   components: {
     VoltarInternas,
   },

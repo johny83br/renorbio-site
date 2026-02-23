@@ -6,9 +6,19 @@
 
 <script>
 export default {
+  props: {
+    url: {
+      type: String,
+      required: false,
+    },
+  },
   methods: {
     historyBack() {
-      window.history.back();
+      if (this.url) {
+        window.location.href = `/#${this.url}`;
+      } else {
+        window.history.back();
+      }
     },
   },
 };
