@@ -1,16 +1,13 @@
 <template lang="pug">
   .footer
     voltar-internas
-    redes-sociais
 </template>
 
 <script>
-import RedesSociais from "@BASICS/RedesSociais";
 import VoltarInternas from "@BASICS/VoltarInternas";
 
 export default {
   components: {
-    RedesSociais,
     VoltarInternas,
   },
 };

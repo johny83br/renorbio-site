@@ -7,7 +7,6 @@
       conteudo(v-html="pagina.corpo")
       .footer(slot="footer")
         voltar-internas
-        redes-sociais
   #pagina(v-else)
     breadcrumb(slot="breadcrumb", :itens="this.breadcrumb")
     .header-loading(slot="titulo")
@@ -22,7 +21,6 @@
 <script>
 import Breadcrumb from "@MODULES/Breadcrumb";
 import Conteudo from "@BASICS/Artigo";
-import RedesSociais from "@BASICS/RedesSociais";
 import Titulo from "@BASICS/Titulo";
 import VoltarInternas from "@BASICS/VoltarInternas";
 
@@ -34,7 +32,6 @@ export default {
   components: {
     Breadcrumb,
     Conteudo,
-    RedesSociais,
     Titulo,
     VoltarInternas,
   },

@@ -42,7 +42,6 @@ import InternasDescricao from "@BASICS/InternasDescricao";
 import InternasRodape from "@MODULES/InternasRodape";
 import InternasTitulo from "@BASICS/InternasTitulo";
 import Pagina from "@BASICS/Pagina";
-import RedesSociais from "@BASICS/RedesSociais";
 import Tag from "@BASICS/Tags";
 import VoltarInternas from "@BASICS/VoltarInternas";
 
@@ -64,7 +63,6 @@ export default {
     InternasRodape,
     InternasTitulo,
     Pagina,
-    RedesSociais,
     Tag,
     VoltarInternas,
   },
