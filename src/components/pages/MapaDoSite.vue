@@ -12,7 +12,7 @@
         li Renorbio
           ul.subitem
             li
-              router-link(:to="{ name: 'Generica', params: { slug: 'o-que-e-biotecnologia', id: 1} }") Sobre a Rede
+              router-link(:to="{ name: 'Generica', params: { slug: 'sobre-a-rede'} }") Sobre a Rede
             li
               router-link(:to="{ name: 'CorpoDocente', params: {} }") Corpo Docente
             li
@@ -31,7 +31,7 @@
             li
               router-link(:to="{ name: 'Eventos', params: {} }") Eventos
             li
-              router-link(:to="{ name: 'RenorbioNaMidia', params: { slug: 'renorbio-na-midia'} }") Renorbio na Mídia
+              router-link(:to="{ name: 'RenorbioNaMidia', params: { slug: 'renorbio-na-midia'} }") Renorbio na mídia
             li
               router-link(:to="{ name: 'Galeria', params: {} }") Galeria
 
@@ -56,9 +56,6 @@
 
         li
           a(:href="acessoConta" target="_blank") Acessar minha conta
-
-        li
-          a(:href="baseUrl + 'busca'") Busca
 
         li Parceiros
           ul.subitem
