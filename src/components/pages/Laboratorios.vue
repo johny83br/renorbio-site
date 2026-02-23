@@ -90,11 +90,6 @@ export default {
     };
   },
   head: {
-    title() {
-      return {
-        inner: `${config.SITE_TITLE} - Laboratorios`,
-      };
-    },
     meta: [
       {
         name: "description",

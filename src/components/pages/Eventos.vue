@@ -68,11 +68,6 @@ export default {
     };
   },
   head: {
-    title() {
-      return {
-        inner: `${config.SITE_TITLE} - Eventos`,
-      };
-    },
     meta: [
       {
         name: "description",

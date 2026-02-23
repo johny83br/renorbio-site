@@ -40,11 +40,6 @@ export default {
     ProcessoSeletivo,
   },
   head: {
-    title() {
-      return {
-        inner: `${config.SITE_TITLE} - Página Principal`,
-      };
-    },
     meta: [
       {
         name: "description",

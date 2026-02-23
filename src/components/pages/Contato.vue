@@ -120,11 +120,6 @@ export default {
     };
   },
   head: {
-    title() {
-      return {
-        inner: `${config.SITE_TITLE} - Contato`,
-      };
-    },
     meta: [
       {
         name: "description",

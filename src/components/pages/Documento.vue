@@ -62,11 +62,6 @@ export default {
   },
   head() {
     return {
-      title() {
-        return {
-          inner: `${config.SITE_TITLE} - Documentos`,
-        };
-      },
       meta: [
         { name: "description", content: config.SITE_DESC, id: "description" },
       ],

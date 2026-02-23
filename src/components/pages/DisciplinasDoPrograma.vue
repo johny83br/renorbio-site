@@ -61,11 +61,6 @@ export default {
     };
   },
   head: {
-    title() {
-      return {
-        inner: `${config.SITE_TITLE} - Disciplinas do programa`,
-      };
-    },
     meta: [
       {
         name: "description",

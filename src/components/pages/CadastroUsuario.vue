@@ -241,11 +241,6 @@ export default {
     };
   },
   head: {
-    title() {
-      return {
-        inner: `${config.SITE_TITLE} - Cadastro`,
-      };
-    },
     meta: [
       {
         name: "description",

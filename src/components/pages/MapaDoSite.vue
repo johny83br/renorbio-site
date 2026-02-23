@@ -1,7 +1,7 @@
 <template lang="pug">
   pagina
     breadcrumb(slot="breadcrumb", :itens="this.breadcrumb")
-    titulo(slot="titulo") Mapa do site
+    titulo(slot="titulo") Mapa do Site
     .content(slot="principal")
       p Aqui está a estrutura de informações do site
 
@@ -91,75 +91,68 @@
 </template>
 
 <script>
-  import Breadcrumb from '@MODULES/Breadcrumb';
-  import Titulo from '@BASICS/Titulo';
-  import Pagina from '@BASICS/Pagina';
+import Breadcrumb from "@MODULES/Breadcrumb";
+import Titulo from "@BASICS/Titulo";
+import Pagina from "@BASICS/Pagina";
 
-  import * as config from '../../scripts/config';
+import * as config from "../../scripts/config";
 
-  export default {
-    components: {
-      Breadcrumb,
-      Titulo,
-      Pagina
-    },
-    data() {
-      return {
-        breadcrumb: [
-          { nome: 'Mapa do site'}
-        ],
-        acessoConta: config.LOGIN,
-        baseUrl: config.URL_BASE
-      };
-    },
-    head: {
-      title() {
-        return {
-          inner: `${config.SITE_TITLE} - Mapa do site`
-        };
+export default {
+  components: {
+    Breadcrumb,
+    Titulo,
+    Pagina,
+  },
+  data() {
+    return {
+      breadcrumb: [{ nome: "Mapa do Site" }],
+      acessoConta: config.LOGIN,
+      baseUrl: config.URL_BASE,
+    };
+  },
+  head: {
+    meta: [
+      {
+        name: "description",
+        content: config.SITE_DESC,
+        id: "description",
       },
-      meta: [
-        {
-          name: 'description', content: config.SITE_DESC, id: 'description'
-        }
-      ]
-    },
-  };
+    ],
+  },
+};
 </script>
 
 <style lang="scss" scoped>
+ul {
+  list-style: none;
+}
 
-  ul {
-    list-style: none;
-  }
+.item li {
+  margin: 5px 0;
+}
 
-  .item li {
-    margin: 5px 0;
-  }
+.item a {
+  color: $cor-cinza;
+}
 
-  .item a {
-    color: $cor-cinza;
-  }
+.subitem li {
+  margin: 5px 0;
+}
 
-  .subitem li {
-    margin: 5px 0;
-  }
+.item a:hover,
+.subitem a:hover {
+  color: $cor-azul-1;
+}
 
-  .item a:hover,
-  .subitem a:hover {
-    color: $cor-azul-1;
-  }
+li > ul {
+  padding-left: 20px;
+}
 
-  li > ul {
-    padding-left: 20px;
-  }
-
-  ul > li:before {
-    content: '\f111';
-    font-family: FontAwesome;
-    color: $cor-azul-1;
-    margin-right: 10px;
-    font-size: 8px;
-  }
-
+ul > li:before {
+  content: "\f111";
+  font-family: FontAwesome;
+  color: $cor-azul-1;
+  margin-right: 10px;
+  font-size: 8px;
+}
 </style>

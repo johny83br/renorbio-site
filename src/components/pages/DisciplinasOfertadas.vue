@@ -66,11 +66,6 @@ export default {
     };
   },
   head: {
-    title() {
-      return {
-        inner: `${config.SITE_TITLE} - Disciplinas ofertadas`,
-      };
-    },
     meta: [
       {
         name: "description",

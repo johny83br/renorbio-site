@@ -89,11 +89,6 @@ export default {
     };
   },
   head: {
-    title() {
-      return {
-        inner: `${config.SITE_TITLE} - ${this.titulo}`,
-      };
-    },
     meta: [
       {
         name: "description",
@@ -138,6 +133,8 @@ export default {
       this.fonte = noticia.acf.origem;
       this.corpo = noticia.acf.corpo;
       this.loading = false;
+
+      document.title = `${this.titulo} | ${config.SITE_TITLE}`;
     },
     getAsyncData() {
       const self = this;

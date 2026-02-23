@@ -25,6 +25,7 @@ import MapaDoSite from "@/components/pages/MapaDoSite";
 import Galeria from "@/components/pages/Galeria";
 import Album from "@/components/pages/Album";
 import Busca from "@/components/pages/Busca";
+import * as config from "../scripts/config";
 
 Vue.use(Router);
 
@@ -32,7 +33,14 @@ const router = new Router({
   mode: "hash", // MUDANÇA PRINCIPAL: usa hash mode para evitar erro 404 no servidor
   base: "/",
   routes: [
-    { path: "/", name: "Index", component: Index },
+    {
+      path: "/",
+      name: "Index",
+      component: Index,
+      meta: {
+        title: "Página principal",
+      },
+    },
 
     {
       path: "/academico",
@@ -46,21 +54,33 @@ const router = new Router({
       path: "/disciplinas/disciplinas-do-programa",
       name: "DisciplinasDoPrograma",
       component: DisciplinasDoPrograma,
+      meta: {
+        title: "Disciplinas do programa",
+      },
     },
     {
       path: "/disciplinas/disciplinas-ofertadas",
       name: "DisciplinasOfertadas",
       component: DisciplinasOfertadas,
+      meta: {
+        title: "Disciplinas ofertadas",
+      },
     },
     {
       path: "/ingresso/cadastro",
       name: "Cadastro",
       component: CadastroUsuario,
+      meta: {
+        title: "Cadastro de usuário",
+      },
     },
     {
       path: "/contato",
       name: "Contato",
       component: Contato,
+      meta: {
+        title: "Contato",
+      },
     },
     {
       path: "/eventos/:id",
@@ -71,6 +91,9 @@ const router = new Router({
       path: "/eventos",
       name: "Eventos",
       component: Eventos,
+      meta: {
+        title: "Eventos",
+      },
     },
     {
       path: "/noticias/:id",
@@ -81,6 +104,9 @@ const router = new Router({
       path: "/noticias",
       name: "Noticias",
       component: Noticias,
+      meta: {
+        title: "Notícias",
+      },
     },
     {
       path: "/pagina-extra/:slug",
@@ -91,41 +117,65 @@ const router = new Router({
       path: "/ingresso/processo-seletivo",
       name: "ProcessoSeletivo",
       component: ProcessoSeletivo,
+      meta: {
+        title: "Processo seletivo",
+      },
     },
     {
       path: "/documentos",
       name: "Documentos",
       component: Documentos,
+      meta: {
+        title: "Documentos",
+      },
     },
     {
       path: "/documentos/:id",
       name: "Documento",
       component: Documento,
+      meta: {
+        title: "Documentos",
+      },
     },
     {
       path: "/renorbio-na-midia",
       name: "RenorbioNaMidia",
       component: RenorbioNaMidia,
+      meta: {
+        title: "Renorbio na mídia",
+      },
     },
     {
       path: "/sobre",
       name: "Sobre",
       component: Sobre,
+      meta: {
+        title: "Sobre",
+      },
     },
     {
       path: "/unidades",
       name: "Unidades",
       component: Unidades,
+      meta: {
+        title: "Unidades",
+      },
     },
     {
       path: "/corpo-docente",
       name: "CorpoDocente",
       component: CorpoDocente,
+      meta: {
+        title: "Corpo docente",
+      },
     },
     {
       path: "/laboratorios",
       name: "Laboratorios",
       component: Laboratorios,
+      meta: {
+        title: "Laboratórios",
+      },
     },
     {
       path: "/pagina/:slug",
@@ -136,11 +186,17 @@ const router = new Router({
       path: "/mapa-do-site",
       name: "MapaDoSite",
       component: MapaDoSite,
+      meta: {
+        title: "Mapa do site",
+      },
     },
     {
       path: "/galeria",
       name: "Galeria",
       component: Galeria,
+      meta: {
+        title: "Galeria",
+      },
     },
     {
       path: "/galeria/:slug",
@@ -151,6 +207,9 @@ const router = new Router({
       path: "/busca",
       name: "Busca",
       component: Busca,
+      meta: {
+        title: "Busca",
+      },
     },
 
     // Rota coringa para rotas não definidas (opcional)
@@ -159,6 +218,13 @@ const router = new Router({
       redirect: "/",
     },
   ],
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.title) {
+    document.title = `${to.meta.title} | ${config.SITE_TITLE}`;
+  }
+  next();
 });
 
 export default router;

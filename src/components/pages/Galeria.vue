@@ -61,11 +61,6 @@ export default {
     };
   },
   head: {
-    title() {
-      return {
-        inner: `${config.SITE_TITLE} - Galeria`,
-      };
-    },
     meta: [
       {
         name: "description",

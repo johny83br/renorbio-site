@@ -88,11 +88,6 @@ export default {
     };
   },
   head: {
-    title() {
-      return {
-        inner: `${config.SITE_TITLE} - Unidades`,
-      };
-    },
     meta: [
       {
         name: "description",

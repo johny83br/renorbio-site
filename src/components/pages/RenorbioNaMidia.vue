@@ -33,11 +33,6 @@ export default {
     };
   },
   head: {
-    title() {
-      return {
-        inner: `${config.SITE_TITLE} - ${this.pagina.titulo}`,
-      };
-    },
     meta: [
       {
         name: "description",

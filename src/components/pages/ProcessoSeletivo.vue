@@ -1,7 +1,7 @@
 <template lang="pug">
   pagina
     breadcrumb(slot="breadcrumb", :itens="this.breadcrumb")
-    titulo(slot="titulo") Processo seletivo
+    titulo(slot="titulo") Processo Seletivo
     .content(slot="principal")
       p
         | O ingresso no programa de doutorado ocorre mediante edital de seleção.
@@ -178,11 +178,6 @@ export default {
     };
   },
   head: {
-    title() {
-      return {
-        inner: `${config.SITE_TITLE} - Processo Seletivo`,
-      };
-    },
     meta: [
       {
         name: "description",

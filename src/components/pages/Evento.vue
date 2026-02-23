@@ -90,11 +90,6 @@ export default {
     };
   },
   head: {
-    title() {
-      return {
-        inner: `${config.SITE_TITLE} - ${this.titulo}`,
-      };
-    },
     meta: [
       {
         name: "description",
@@ -160,6 +155,8 @@ export default {
       }
       this.corpo = evento.acf.corpo;
       this.loading = false;
+
+      document.title = `${this.titulo} | Evento | ${config.SITE_TITLE}`;
     },
     getAsyncData() {
       const self = this;

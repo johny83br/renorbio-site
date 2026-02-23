@@ -71,7 +71,7 @@ export default {
   },
   data() {
     return {
-      breadcrumb: [{ nome: "Renorbio" }, { nome: "Corpo docente" }],
+      breadcrumb: [{ nome: "Renorbio" }, { nome: "Corpo Docente" }],
       id: "",
       estados: [],
       filter: "",
@@ -92,11 +92,6 @@ export default {
     };
   },
   head: {
-    title() {
-      return {
-        inner: `${config.SITE_TITLE} - Corpo Docente`,
-      };
-    },
     meta: [
       {
         name: "description",

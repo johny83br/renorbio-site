@@ -38,11 +38,6 @@ export default {
     };
   },
   head: {
-    title() {
-      return {
-        inner: `${config.SITE_TITLE} - ${this.pagina.titulo}`,
-      };
-    },
     meta: [
       {
         name: "description",
@@ -56,11 +51,12 @@ export default {
       this.loadPagina(to.params.slug);
     },
   },
-  mounted() {
+  async mounted() {
     this.slug = this.$route.params.slug ? this.$route.params.slug : "";
     if (this.slug !== "") {
-      this.loadPagina(this.slug);
+      await this.loadPagina(this.slug);
     }
+    document.title = `${this.pagina.titulo} | ${config.SITE_TITLE}`;
     this.getAsyncData();
   },
   beforeUpdate() {

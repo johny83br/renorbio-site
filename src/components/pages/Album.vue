@@ -50,11 +50,6 @@ export default {
     };
   },
   head: {
-    title() {
-      return {
-        inner: `${config.SITE_TITLE} - Álbum`,
-      };
-    },
     meta: [
       {
         name: "description",
@@ -66,6 +61,7 @@ export default {
   async mounted() {
     this.slug = this.$route.params.slug ? this.$route.params.slug : "";
     await this.loadFotos(this.slug);
+    document.title = `${this.titulo} | Galeria | ${config.SITE_TITLE}`;
   },
   methods: {
     async loadFotos(slug) {
