@@ -24,8 +24,6 @@
           i.fa.fa-envelope
           a(href="mailto:renorbiopb.cg@cbiotec.ufpb.br"  title="Enviar e-mail para:") renorbiopb.cg@cbiotec.ufpb.br
                 .email
-          i.fa.fa-envelope
-          a(href="mailto:secrenorbio.cg@cbiotec.ufpb.br"  title="Enviar e-mail para:") secrenorbio.cg@cbiotec.ufpb.br
         .facebook
           a(href='https://www.facebook.com/Doutorado-em-Biotecnologia-Renorbio-254004538887724/' target='_blank' title='Acessar página do'  rel="noopener noreferrer")
             i.fa.fa-facebook-official
