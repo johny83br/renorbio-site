@@ -38,6 +38,7 @@ import NoticiasLista from "@MODULES/NoticiasLista";
 import Pagina from "@BASICS/Pagina";
 import Paginate from "vuejs-paginate";
 import Titulo from "@BASICS/Titulo";
+import he from 'he';
 
 import { getNoticias } from "../../scripts/services/NoticiaService";
 
@@ -100,7 +101,7 @@ export default {
         const tagsAtual = [];
         const noticiaTratada = {
           id: noticia.id,
-          titulo: noticia.title.rendered,
+          titulo: he.decode(noticia.title.rendered),
           subtitulo: noticia.acf.subtitulo,
           data_publicacao: Utils.dataFormatada(
             noticia.acf.data_de_publicacao * 1000,

@@ -23,6 +23,7 @@
 import Mensagem from "@BASICS/Mensagem";
 import NoticiasLista from "@MODULES/NoticiasLista";
 import Titulo from "@BASICS/Titulo";
+import he from 'he';
 
 import { getNoticias } from "../../scripts/services/NoticiaService";
 
@@ -73,7 +74,7 @@ export default {
         const noticia = v[1];
         const noticiaTratada = {
           id: noticia.id,
-          titulo: noticia.title.rendered,
+          titulo: he.decode(noticia.title.rendered),
           subtitulo: noticia.acf.subtitulo,
           data_publicacao: Utils.dataFormatada(
             noticia.acf.data_de_publicacao * 1000,

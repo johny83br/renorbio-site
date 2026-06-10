@@ -34,6 +34,7 @@ import Titulo from "@BASICS/Titulo";
 import ListaCategorias from "@BASICS/ListaCategorias";
 import InternasRodape from "@MODULES/InternasRodape";
 import Mensagem from "@BASICS/Mensagem";
+import he from 'he';
 
 import DocumentosService from "../../scripts/services/DocumentosService";
 
@@ -78,7 +79,7 @@ export default {
       DocumentosService.getDocumentos(id, perPage).then(response => {
         for (let i = 0; i < response.data.length; i++) {
           const documentoTratado = {
-            titulo: response.data[i].title.rendered,
+            titulo: he.decode(response.data[i].title.rendered),
             anexo: response.data[i].acf.anexo
               ? response.data[i].acf.anexo
               : false,

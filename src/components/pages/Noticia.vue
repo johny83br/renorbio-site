@@ -45,6 +45,7 @@ import InternasTitulo from "@BASICS/InternasTitulo";
 import Pagina from "@BASICS/Pagina";
 import Tag from "@BASICS/Tags";
 import VoltarInternas from "@BASICS/VoltarInternas";
+import he from 'he';
 
 import { getNoticia } from "../../scripts/services/NoticiaService";
 
@@ -104,7 +105,7 @@ export default {
       const noticia = await getNoticia(id);
 
       this.id = noticia.id;
-      this.titulo = noticia.title.rendered;
+      this.titulo = he.decode(noticia.title.rendered);
       this.subtitulo = noticia.acf.subtitulo;
       this.imagem = noticia.featured_media
         ? noticia._embedded["wp:featuredmedia"][0].source_url
