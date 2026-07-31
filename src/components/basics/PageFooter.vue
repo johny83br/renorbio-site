@@ -19,7 +19,7 @@
       .rodape-centro
         .telefone
           i.fa.fa-phone
-          a(href="tel:+558332167366" title="Ligar para:") +55 (83) 32167366
+          a(href="tel:+558332167366" title="Ligar para:") +55 (83) 3216-7511
         .email
           i.fa.fa-envelope
           a(href="mailto:renorbiopb.cg@cbiotec.ufpb.br"  title="Enviar e-mail para:") renorbiopb.cg@cbiotec.ufpb.br
