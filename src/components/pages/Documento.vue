@@ -36,7 +36,7 @@ import InternasRodape from "@MODULES/InternasRodape";
 import Mensagem from "@BASICS/Mensagem";
 import he from 'he';
 
-import DocumentosService from "../../scripts/services/DocumentosService";
+import DocumentosService, {getCategorias} from "../../scripts/services/DocumentosService";
 
 import * as config from "../../scripts/config";
 
@@ -68,10 +68,24 @@ export default {
       ],
     };
   },
-  created() {
+  async created() {
+    const categorias = await getCategorias();
+    const documentosTratados = [];
+
+    Object.entries(categorias).forEach(v => {
+      const i = v[0];
+      const documentoTratado = {
+        name: categorias[i].name,
+        id: categorias[i].id,
+      };
+      documentosTratados.push(documentoTratado);
+    });
+
+    const documento = documentosTratados.find(doc => doc.id === parseInt(this.$route.params.id));
+
     this.getDocumentos(this.$route.params.id, this.perPage);
-    this.nome = this.$route.params.nome;
-    this.breadcrumb[1].nome = this.$route.params.nome;
+    this.nome = documento.name;
+    this.breadcrumb[1].nome = documento.name;
   },
   methods: {
     getDocumentos(id, perPage) {
